@@ -87,12 +87,12 @@ export async function getPublishedArticles(): Promise<Article[]> {
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
   const pool = getPool();
   const result = await pool.query(`SELECT * FROM articles WHERE slug = $1 LIMIT 1`, [slug]);
-  if (!result.rowCount) return null;
+  if (result.rows.length === 0) return null;
   return mapRow(result.rows[0]);
 }
 
 export async function articleSlugExists(slug: string): Promise<boolean> {
   const pool = getPool();
   const result = await pool.query(`SELECT 1 FROM articles WHERE slug = $1 LIMIT 1`, [slug]);
-  return result.rowCount > 0;
+  return result.rows.length > 0;
 }
