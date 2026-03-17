@@ -4,7 +4,7 @@ import { pickTopic } from "@/lib/topics";
 
 export async function POST(req: NextRequest) {
   const secret = req.headers.get("x-agent-secret");
-  if (!isAgentSecretValid(secret)) {
+  if (!secret || !isAgentSecretValid(secret)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
