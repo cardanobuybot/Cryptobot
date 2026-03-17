@@ -33,14 +33,6 @@ export interface NewArticleInput {
   publishedAt?: string | null;
 }
 
-interface PgLikeError {
-  code?: string;
-}
-
-function isMissingArticlesTable(error: unknown): boolean {
-  return Boolean((error as PgLikeError | undefined)?.code === "42P01");
-}
-
 function mapRow(row: any): Article {
   return {
     id: row.id,
@@ -86,42 +78,21 @@ export async function createArticle(input: NewArticleInput): Promise<Article> {
 
 export async function getPublishedArticles(): Promise<Article[]> {
   const pool = getPool();
-  try {
-    const result = await pool.query(
-      `SELECT * FROM articles WHERE status = 'published' ORDER BY published_at DESC NULLS LAST, created_at DESC`
-    );
-    return result.rows.map(mapRow);
-  } catch (error) {
-    if (isMissingArticlesTable(error)) {
-      return [];
-    }
-    throw error;
-  }
+  const result = await pool.query(
+    `SELECT * FROM articles WHERE status = 'published' ORDER BY published_at DESC NULLS LAST, created_at DESC`
+  );
+  return result.rows.map(mapRow);
 }
 
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
   const pool = getPool();
-  try {
-    const result = await pool.query(`SELECT * FROM articles WHERE slug = $1 LIMIT 1`, [slug]);
-    if (result.rows.length === 0) return null;
-    return mapRow(result.rows[0]);
-  } catch (error) {
-    if (isMissingArticlesTable(error)) {
-      return null;
-    }
-    throw error;
-  }
+  const result = await pool.query(`SELECT * FROM articles WHERE slug = $1 LIMIT 1`, [slug]);
+  if (!result.rowCount) return null;
+  return mapRow(result.rows[0]);
 }
 
 export async function articleSlugExists(slug: string): Promise<boolean> {
   const pool = getPool();
-  try {
-    const result = await pool.query(`SELECT 1 FROM articles WHERE slug = $1 LIMIT 1`, [slug]);
-    return result.rows.length > 0;
-  } catch (error) {
-    if (isMissingArticlesTable(error)) {
-      return false;
-    }
-    throw error;
-  }
+  const result = await pool.query(`SELECT 1 FROM articles WHERE slug = $1 LIMIT 1`, [slug]);
+  return result.rowCount > 0;
 }
