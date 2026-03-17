@@ -1,4 +1,4 @@
-export const DEFAULT_TOPICS: string[] = [
+export const DEFAULT_TOPICS = [
   "What is a crypto trading bot",
   "Risks of automated crypto trading",
   "How crypto signal bots work",
@@ -7,9 +7,11 @@ export const DEFAULT_TOPICS: string[] = [
   "Beginner guide to trading automation",
   "Risk management for crypto bots",
   "API security for trading bots",
-];
+] as const;
 
-export function pickTopic(): string {
-  const seed = new Date().getUTCDate() + new Date().getUTCMonth();
+export type ArticleTopic = (typeof DEFAULT_TOPICS)[number];
+
+export function pickTopic(date: Date = new Date()): ArticleTopic {
+  const seed = date.getUTCDate() + date.getUTCMonth();
   return DEFAULT_TOPICS[seed % DEFAULT_TOPICS.length];
 }

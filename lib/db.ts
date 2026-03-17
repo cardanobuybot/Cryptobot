@@ -1,7 +1,7 @@
-import { Pool } from "pg";
+import { Pool, type QueryResultRow } from "pg";
 import { requireEnv } from "@/lib/env";
 
-let pool: Pool | null = null;
+let pool: Pool | undefined;
 
 export function getPool(): Pool {
   if (!pool) {
@@ -11,5 +11,10 @@ export function getPool(): Pool {
       ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : undefined,
     });
   }
+
   return pool;
+}
+
+export async function dbQuery<T extends QueryResultRow>(text: string, params: readonly unknown[] = []) {
+  return getPool().query<T>(text, params as unknown[]);
 }
