@@ -33,6 +33,14 @@ export interface NewArticleInput {
   publishedAt?: string | null;
 }
 
+interface PgLikeError {
+  code?: string;
+}
+
+function isMissingArticlesTable(error: unknown): boolean {
+  return Boolean((error as PgLikeError | undefined)?.code === "42P01");
+}
+
 function mapRow(row: any): Article {
   return {
     id: row.id,
@@ -78,21 +86,42 @@ export async function createArticle(input: NewArticleInput): Promise<Article> {
 
 export async function getPublishedArticles(): Promise<Article[]> {
   const pool = getPool();
-  const result = await pool.query(
-    `SELECT * FROM articles WHERE status = 'published' ORDER BY published_at DESC NULLS LAST, created_at DESC`
-  );
-  return result.rows.map(mapRow);
+  try {
+    const result = await pool.query(
+      `SELECT * FROM articles WHERE status = 'published' ORDER BY published_at DESC NULLS LAST, created_at DESC`
+    );
+    return result.rows.map(mapRow);
+  } catch (error) {
+    if (isMissingArticlesTable(error)) {
+      return [];
+    }
+    throw error;
+  }
 }
 
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
   const pool = getPool();
-  const result = await pool.query(`SELECT * FROM articles WHERE slug = $1 LIMIT 1`, [slug]);
-  if (result.rows.length === 0) return null;
-  return mapRow(result.rows[0]);
+  try {
+    const result = await pool.query(`SELECT * FROM articles WHERE slug = $1 LIMIT 1`, [slug]);
+    if (result.rows.length === 0) return null;
+    return mapRow(result.rows[0]);
+  } catch (error) {
+    if (isMissingArticlesTable(error)) {
+      return null;
+    }
+    throw error;
+  }
 }
 
 export async function articleSlugExists(slug: string): Promise<boolean> {
   const pool = getPool();
-  const result = await pool.query(`SELECT 1 FROM articles WHERE slug = $1 LIMIT 1`, [slug]);
-  return result.rows.length > 0;
+  try {
+    const result = await pool.query(`SELECT 1 FROM articles WHERE slug = $1 LIMIT 1`, [slug]);
+    return result.rows.length > 0;
+  } catch (error) {
+    if (isMissingArticlesTable(error)) {
+      return false;
+    }
+    throw error;
+  }
 }
