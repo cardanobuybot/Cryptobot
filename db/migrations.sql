@@ -1,3 +1,5 @@
+BEGIN;
+
 CREATE TABLE IF NOT EXISTS articles (
   id BIGSERIAL PRIMARY KEY,
   slug TEXT NOT NULL UNIQUE,
@@ -5,7 +7,7 @@ CREATE TABLE IF NOT EXISTS articles (
   excerpt TEXT NOT NULL,
   content TEXT NOT NULL,
   cover_image_url TEXT,
-  status TEXT NOT NULL CHECK (status IN ('draft', 'published')) DEFAULT 'draft',
+  status TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'published')),
   tags TEXT[],
   seo_title TEXT,
   seo_description TEXT,
@@ -16,18 +18,20 @@ CREATE TABLE IF NOT EXISTS articles (
 );
 
 CREATE INDEX IF NOT EXISTS idx_articles_status_published_at
-  ON articles(status, published_at DESC);
+  ON articles (status, published_at DESC);
 
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION set_articles_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
   NEW.updated_at = NOW();
   RETURN NEW;
 END;
-$$ language 'plpgsql';
+$$ LANGUAGE plpgsql;
 
 DROP TRIGGER IF EXISTS trg_articles_updated_at ON articles;
 CREATE TRIGGER trg_articles_updated_at
 BEFORE UPDATE ON articles
 FOR EACH ROW
-EXECUTE PROCEDURE set_updated_at();
+EXECUTE FUNCTION set_articles_updated_at();
+
+COMMIT;

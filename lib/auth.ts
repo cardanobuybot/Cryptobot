@@ -1,11 +1,10 @@
 import { cookies } from "next/headers";
-import { requireEnv } from "@/lib/env";
+import { isAgentSecretValid } from "@/lib/env";
 
 export const ADMIN_COOKIE = "cb_admin_auth";
 
 export function isValidSecret(secret: string | null): boolean {
-  if (!secret) return false;
-  return secret === requireEnv("ARTICLE_AGENT_SECRET");
+  return isAgentSecretValid(secret);
 }
 
 export function isAdminAuthed(): boolean {

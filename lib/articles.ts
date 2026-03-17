@@ -1,6 +1,23 @@
-import { getPool } from "@/lib/db";
+import { dbQuery } from "@/lib/db";
 
 export type ArticleStatus = "draft" | "published";
+
+interface ArticleRow {
+  id: number;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  cover_image_url: string | null;
+  status: ArticleStatus;
+  tags: string[] | null;
+  seo_title: string | null;
+  seo_description: string | null;
+  source_topic: string;
+  created_at: Date;
+  updated_at: Date;
+  published_at: Date | null;
+}
 
 export interface Article {
   id: number;
@@ -33,7 +50,7 @@ export interface NewArticleInput {
   publishedAt?: string | null;
 }
 
-function mapRow(row: any): Article {
+function mapRow(row: ArticleRow): Article {
   return {
     id: row.id,
     slug: row.slug,
@@ -53,8 +70,7 @@ function mapRow(row: any): Article {
 }
 
 export async function createArticle(input: NewArticleInput): Promise<Article> {
-  const pool = getPool();
-  const result = await pool.query(
+  const result = await dbQuery<ArticleRow>(
     `INSERT INTO articles
       (slug, title, excerpt, content, cover_image_url, status, tags, seo_title, seo_description, source_topic, published_at)
      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
@@ -73,26 +89,28 @@ export async function createArticle(input: NewArticleInput): Promise<Article> {
       input.publishedAt ?? null,
     ]
   );
+
   return mapRow(result.rows[0]);
 }
 
 export async function getPublishedArticles(): Promise<Article[]> {
-  const pool = getPool();
-  const result = await pool.query(
+  const result = await dbQuery<ArticleRow>(
     `SELECT * FROM articles WHERE status = 'published' ORDER BY published_at DESC NULLS LAST, created_at DESC`
   );
+
   return result.rows.map(mapRow);
 }
 
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
-  const pool = getPool();
-  const result = await pool.query(`SELECT * FROM articles WHERE slug = $1 LIMIT 1`, [slug]);
-  if (!result.rowCount) return null;
+  const result = await dbQuery<ArticleRow>(`SELECT * FROM articles WHERE slug = $1 LIMIT 1`, [slug]);
+  if (!result.rowCount) {
+    return null;
+  }
+
   return mapRow(result.rows[0]);
 }
 
 export async function articleSlugExists(slug: string): Promise<boolean> {
-  const pool = getPool();
-  const result = await pool.query(`SELECT 1 FROM articles WHERE slug = $1 LIMIT 1`, [slug]);
+  const result = await dbQuery<{ found: 1 }>(`SELECT 1 AS found FROM articles WHERE slug = $1 LIMIT 1`, [slug]);
   return result.rowCount > 0;
 }

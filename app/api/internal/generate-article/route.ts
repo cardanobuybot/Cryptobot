@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createArticle } from "@/lib/articles";
+import { isAgentSecretValid } from "@/lib/env";
 import { generateArticle } from "@/lib/openai";
-import { isValidSecret } from "@/lib/auth";
 
-interface Body {
+interface GenerateArticleBody {
   topic?: string;
   keywords?: string[];
   tone?: string;
@@ -12,13 +12,13 @@ interface Body {
 
 export async function POST(req: NextRequest) {
   const secret = req.headers.get("x-agent-secret");
-  if (!isValidSecret(secret)) {
+  if (!isAgentSecretValid(secret)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  let body: Body;
+  let body: GenerateArticleBody;
   try {
-    body = await req.json();
+    body = (await req.json()) as GenerateArticleBody;
   } catch {
     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
@@ -30,12 +30,12 @@ export async function POST(req: NextRequest) {
   try {
     const generated = await generateArticle({
       topic: body.topic,
-      keywords: body.keywords,
+      keywords: Array.isArray(body.keywords) ? body.keywords : undefined,
       tone: body.tone,
     });
 
     const publish = Boolean(body.publish);
-    const now = new Date().toISOString();
+    const nowIso = new Date().toISOString();
 
     const article = await createArticle({
       slug: generated.slug,
@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
       seoTitle: generated.seoTitle,
       seoDescription: generated.seoDescription,
       sourceTopic: body.topic,
-      publishedAt: publish ? now : null,
+      publishedAt: publish ? nowIso : null,
     });
 
     return NextResponse.json({
