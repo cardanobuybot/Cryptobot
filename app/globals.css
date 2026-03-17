@@ -1,0 +1,11 @@
+/* Additive styles for Next.js blog/admin pages while preserving main site design from styles.css */
+.cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.card { border: 1px solid var(--line); border-radius: 12px; padding: 16px; background: var(--card); }
+.stack { display: grid; gap: 10px; }
+.row { display: flex; gap: 8px; align-items: center; }
+input, button, textarea { padding: 10px; border-radius: 8px; border: 1px solid #2c4a80; background: #0d1730; color: #fff; width: 100%; }
+button { background: #23b8ff; color: #031524; font-weight: 700; cursor: pointer; }
+.error { color: #ff8d8d; }
+.meta { color: #b3c7ea; }
+.article h2, .article h3 { margin-top: 1.2rem; }
+.article p, .article li { color: #d4e5ff; }
