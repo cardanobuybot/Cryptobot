@@ -112,5 +112,5 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
 
 export async function articleSlugExists(slug: string): Promise<boolean> {
   const result = await dbQuery<{ found: 1 }>(`SELECT 1 AS found FROM articles WHERE slug = $1 LIMIT 1`, [slug]);
-  return result.rowCount > 0;
+  return (result.rowCount ?? 0) > 0;
 }
