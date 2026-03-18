@@ -86,6 +86,61 @@
     <title>Crypto Bot — Fast Crypto Trading in Telegram</title>
     <link rel="stylesheet" href="https://cryptobot.ltd/styles.css">
 
+    <style>
+        .latest-articles {
+            padding: 80px 0;
+        }
+
+        .blog-grid {
+            display: grid;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .blog-card {
+            border: 1px solid rgba(145, 168, 222, 0.2);
+            background: rgba(22, 32, 57, 0.72);
+            border-radius: 18px;
+            padding: 24px;
+            transition: 0.2s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(0, 8, 30, 0.5);
+        }
+
+        .blog-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .blog-card a {
+            color: #eaf4ff;
+            text-decoration: none;
+        }
+
+        .blog-card a:hover {
+            text-decoration: underline;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 12px;
+            color: #9fb2d8;
+        }
+
+        .blog-cta {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .section-title .ai-note {
+            color: #9fb2d8;
+            max-width: 700px;
+            margin: 10px auto 0;
+        }
+    </style>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMXZNZDY3X"></script>
     <script>
@@ -105,6 +160,7 @@
             <span>Crypto Bot</span>
         </a>
         <nav class="quick-nav" aria-label="Main">
+            <a href="/blog">Blog</a>
             <a href="#features">Features</a>
             <a href="#how">How it works</a>
             <a href="#faq">FAQ</a>
@@ -162,6 +218,36 @@
             <details class="faq-item"><summary>Is Crypto Bot beginner-friendly?</summary><p>Yes. It works inside Telegram and keeps wallet, trading, and payments in one straightforward flow.</p></details>
             <details class="faq-item"><summary>Can I buy and sell directly from Telegram?</summary><p>Yes. You can use both P2P offers and exchange trading without leaving Telegram.</p></details>
             <details class="faq-item"><summary>Can businesses accept crypto payments?</summary><p>Yes. Crypto Bot supports invoices and Crypto Pay for creators, stores, and online services.</p></details>
+        </div>
+    </div>
+</section>
+
+<section class="latest-articles" id="blog-preview">
+    <div class="container">
+        <div class="section-title">
+            <h2>Latest Articles</h2>
+            <p>Guides and insights about TON, Telegram bots, and crypto payments.</p>
+            <p class="ai-note">
+                This blog is powered by an AI content agent that continuously creates and updates articles about crypto trading, TON, and Telegram automation.
+            </p>
+        </div>
+
+        <div class="blog-grid">
+            <article class="blog-card">
+                <h3>
+                    <a href="/blog/how-to-accept-payments-in-ton-using-a-telegram-bot-2">
+                        How to Accept Payments in TON Using a Telegram Bot
+                    </a>
+                </h3>
+                <p>Learn how to accept TON payments inside Telegram using bots, invoices, and Crypto Pay.</p>
+                <a href="/blog/how-to-accept-payments-in-ton-using-a-telegram-bot-2" class="read-more">
+                    Read article →
+                </a>
+            </article>
+        </div>
+
+        <div class="blog-cta">
+            <a href="/blog" class="btn btn-primary">View all articles</a>
         </div>
     </div>
 </section>
