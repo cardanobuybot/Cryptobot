@@ -27,14 +27,6 @@ function asString(value: unknown, field: string): string {
   return value.trim();
 }
 
-function asOptionalString(value: unknown): string | null {
-  if (typeof value !== 'string' || value.trim().length === 0) {
-    return null;
-  }
-
-  return value.trim();
-}
-
 export async function generateArticle(topic: string): Promise<GeneratedArticle> {
   const openai = getClient();
 
@@ -73,15 +65,12 @@ export async function generateArticle(topic: string): Promise<GeneratedArticle> 
   }
 
   const data = parsed as Record<string, unknown>;
-  const title = asString(data.title, 'title');
-  const excerpt = asString(data.excerpt, 'excerpt');
-  const articleContent = asString(data.content, 'content');
 
   return {
-    title,
-    excerpt,
-    content: articleContent,
-    seoTitle: asOptionalString(data.seoTitle) ?? title,
-    seoDescription: asOptionalString(data.seoDescription) ?? excerpt
+    title: asString(data.title, 'title'),
+    excerpt: asString(data.excerpt, 'excerpt'),
+    content: asString(data.content, 'content'),
+    seoTitle: asString(data.seoTitle, 'seoTitle'),
+    seoDescription: asString(data.seoDescription, 'seoDescription')
   };
 }
