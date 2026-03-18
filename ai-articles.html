@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internal AI Articles — Crypto Bot</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://cryptobot.ltd/ai-articles.html">
+  <link rel="stylesheet" href="https://cryptobot.ltd/styles.css">
+  <style>
+    .admin-form {
+      display: grid;
+      gap: 14px;
+    }
+    .admin-form label {
+      display: grid;
+      gap: 8px;
+      font-weight: 600;
+    }
+    .admin-form input[type="text"],
+    .admin-form input[type="password"] {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      background: rgba(8, 15, 33, 0.78);
+      color: #e6eefb;
+    }
+    .admin-form .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+    }
+    .admin-note,
+    .admin-result,
+    .admin-error {
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .admin-error {
+      color: #ffb4c3;
+    }
+    .admin-result {
+      color: #b8f7c6;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header"><div class="container header-content"><a class="logo" href="/"><img src="https://cryptobot.ltd/cryptobot.jpg" alt="Crypto Bot Logo"><span>Crypto Bot</span></a><nav class="quick-nav"><a href="/">Home</a><a href="/about.html">About</a><a href="/contact.html">Contact</a></nav></div></header>
+  <main class="content-page">
+    <div class="container">
+      <p class="breadcrumbs"><a href="/">Home</a> / Internal AI Articles</p>
+      <div class="section-title">
+        <h1>Internal AI Articles</h1>
+        <p>Private static admin page for manually generating one article through the deployed internal API.</p>
+      </div>
+
+      <article class="panel">
+        <form id="article-form" class="admin-form">
+          <label>
+            Agent secret
+            <input id="agent-secret" type="password" autocomplete="off" placeholder="ARTICLE_AGENT_SECRET">
+          </label>
+
+          <label>
+            Topic
+            <input id="topic" type="text" placeholder="How to accept crypto payments safely" required>
+          </label>
+
+          <label>
+            Keywords
+            <input id="keywords" type="text" placeholder="payments, security, merchants">
+          </label>
+
+          <label class="checkbox-row">
+            <input id="publish" type="checkbox">
+            <span>Publish immediately</span>
+          </label>
+
+          <button id="submit-button" type="submit" class="btn btn-primary">Generate article</button>
+        </form>
+      </article>
+
+      <article class="panel">
+        <h2>Response</h2>
+        <p id="status-line" class="admin-note">Ready.</p>
+        <div id="success-output" class="admin-result"></div>
+        <div id="error-output" class="admin-error"></div>
+        <pre id="raw-output" class="admin-note"></pre>
+      </article>
+    </div>
+  </main>
+  <footer><div class="container footer-grid"><p>© 2026 Crypto Bot Ltd.</p><div class="footer-links"><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="/legal.html">Legal</a></div></div></footer>
+
+  <script>
+    (function () {
+      var form = document.getElementById('article-form');
+      var secretInput = document.getElementById('agent-secret');
+      var topicInput = document.getElementById('topic');
+      var keywordsInput = document.getElementById('keywords');
+      var publishInput = document.getElementById('publish');
+      var submitButton = document.getElementById('submit-button');
+      var statusLine = document.getElementById('status-line');
+      var successOutput = document.getElementById('success-output');
+      var errorOutput = document.getElementById('error-output');
+      var rawOutput = document.getElementById('raw-output');
+      var params = new URLSearchParams(window.location.search);
+      var initialSecret = params.get('secret');
+
+      if (initialSecret) {
+        secretInput.value = initialSecret;
+      }
+
+      form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        successOutput.textContent = '';
+        errorOutput.textContent = '';
+        rawOutput.textContent = '';
+
+        var secret = secretInput.value.trim();
+        var topic = topicInput.value.trim();
+        var keywords = keywordsInput.value.trim();
+        var publish = publishInput.checked;
+
+        if (!secret) {
+          errorOutput.textContent = 'Agent secret is required.';
+          return;
+        }
+
+        if (!topic) {
+          errorOutput.textContent = 'Topic is required.';
+          return;
+        }
+
+        var finalTopic = topic;
+        if (keywords) {
+          finalTopic += '\n\nKeywords: ' + keywords;
+        }
+
+        submitButton.disabled = true;
+        statusLine.textContent = 'Generating article...';
+
+        try {
+          var response = await fetch('/api/internal/generate-article', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-agent-secret': secret
+            },
+            body: JSON.stringify({
+              topic: finalTopic,
+              publish: publish
+            })
+          });
+
+          var text = await response.text();
+          var data;
+          try {
+            data = text ? JSON.parse(text) : null;
+          } catch (parseError) {
+            data = { raw: text };
+          }
+
+          rawOutput.textContent = typeof data === 'object' && data !== null ? JSON.stringify(data, null, 2) : String(data);
+
+          if (!response.ok) {
+            throw new Error(data && data.error ? data.error : 'Request failed with status ' + response.status);
+          }
+
+          successOutput.textContent = 'Title: ' + data.title + '\nStatus: ' + data.status + '\nSlug: ' + data.slug + '\nLink: /blog/' + data.slug;
+          statusLine.textContent = 'Success.';
+        } catch (error) {
+          errorOutput.textContent = error instanceof Error ? error.message : 'Request failed.';
+          statusLine.textContent = 'Request failed.';
+        } finally {
+          submitButton.disabled = false;
+        }
+      });
+    }());
+  </script>
+</body>
+</html>
