@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Crypto Blog</title>
+  <meta name="description" content="Crypto Bot Blog about TON and Telegram payments">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<header>
+  <h1>Crypto Blog</h1>
+</header>
+
+<main>
+  <ul id="articles"></ul>
+</main>
+
+<script>
+async function loadArticles() {
+  const res = await fetch('/api/blog');
+  const html = await res.text();
+
+  // парсим ссылки из HTML
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+
+  const links = doc.querySelectorAll('a');
+
+  const list = document.getElementById('articles');
+
+  links.forEach(link => {
+    const li = document.createElement('li');
+    li.appendChild(link);
+    list.appendChild(li);
+  });
+}
+
+loadArticles();
+</script>
+
+</body>
+</html>
