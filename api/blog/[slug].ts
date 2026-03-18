@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { getArticleBySlug } from '../../lib/articles';
+import { getArticleBySlug } from '../../lib/articles.js';
 
 function escapeHtml(value: string): string {
   return value
