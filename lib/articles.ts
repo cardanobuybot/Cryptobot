@@ -11,6 +11,33 @@ export type StoredArticle = {
   title: string;
 };
 
+export type BlogArticle = {
+  id: number;
+  slug: string;
+  title: string;
+  content: string;
+  status: ArticleStatus;
+  created_at: Date | string;
+};
+
+export async function getArticleBySlug(slug: string): Promise<BlogArticle | null> {
+  const normalizedSlug = slug.trim();
+  if (!normalizedSlug) {
+    return null;
+  }
+
+  const pool = getPool();
+  const result = await pool.query<BlogArticle>(
+    `SELECT id, slug, title, content, status, created_at
+     FROM articles
+     WHERE slug = $1
+     LIMIT 1`,
+    [normalizedSlug]
+  );
+
+  return result.rows[0] ?? null;
+}
+
 export async function generateAndStoreArticle(input: {
   topic: string;
   publish?: boolean;
