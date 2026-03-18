@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { getArticleBySlug } from '../../lib/articles.js';
+import { getArticleBySlug } from '../../lib/articles';
 
 function escapeHtml(value: string): string {
   return value
@@ -21,7 +21,6 @@ function getSlug(req: VercelRequest): string {
 function renderPage(input: {
   title: string;
   body: string;
-  statusCode?: number;
   seoTitle?: string;
   seoDescription?: string;
 }): string {
@@ -32,7 +31,7 @@ function renderPage(input: {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${input.seoTitle ?? input.title}</title>
   <meta name="description" content="${input.seoDescription ?? input.title}">
-  <meta name="robots" content="noindex,nofollow">
+  <meta name="robots" content="index,follow">
   <link rel="stylesheet" href="https://cryptobot.ltd/styles.css">
   <style>
     .article-shell { padding: 44px 0 70px; }
@@ -52,19 +51,44 @@ function renderPage(input: {
       margin: 12px 0 20px;
     }
     .article-content {
-      white-space: pre-wrap;
       color: #eaf4ff;
       line-height: 1.75;
-    }
-    .article-content code {
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     }
   </style>
 </head>
 <body>
-  <header class="site-header"><div class="container header-content"><a class="logo" href="/"><img src="https://cryptobot.ltd/cryptobot.jpg" alt="Crypto Bot Logo"><span>Crypto Bot</span></a><nav class="quick-nav"><a href="/">Home</a><a href="/ai-articles.html">AI Admin</a><a href="/contact.html">Contact</a></nav></div></header>
-  <main class="article-shell"><div class="article-wrap"><article class="article-card">${input.body}</article></div></main>
-  <footer><div class="container footer-grid"><p>© 2026 Crypto Bot Ltd.</p><div class="footer-links"><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="/legal.html">Legal</a></div></div></footer>
+  <header class="site-header">
+    <div class="container header-content">
+      <a class="logo" href="/">
+        <img src="https://cryptobot.ltd/cryptobot.jpg" alt="Crypto Bot Logo">
+        <span>Crypto Bot</span>
+      </a>
+      <nav class="quick-nav">
+        <a href="/">Home</a>
+        <a href="/ai-articles.html">AI Admin</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article-shell">
+    <div class="article-wrap">
+      <article class="article-card">
+        ${input.body}
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <p>© 2026 Crypto Bot Ltd.</p>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/legal.html">Legal</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>`;
 }
@@ -82,29 +106,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
 
     if (!article) {
       res.status(404).setHeader('Content-Type', 'text/html; charset=utf-8');
-      res.send(
-        renderPage({
-          title: 'Not found',
-          seoTitle: 'Article not found — Crypto Bot',
-          seoDescription: 'Requested article was not found.',
-          body: '<h1>Not found</h1><p style="color:#9fb2d8;">The requested article could not be found.</p>'
-        })
-      );
+      res.send(`
+        <h1>Not found</h1>
+        <p>Article not found</p>
+      `);
       return;
     }
 
-    const createdAt = article.created_at instanceof Date
-      ? article.created_at.toISOString().slice(0, 10)
-      : String(article.created_at).slice(0, 10);
+    const createdAt =
+      article.created_at instanceof Date
+        ? article.created_at.toISOString().slice(0, 10)
+        : String(article.created_at).slice(0, 10);
 
     const body = `
-      <p class="breadcrumbs"><a href="/">Home</a> / Blog / ${escapeHtml(article.slug)}</p>
+      <p><a href="/">Home</a> / Blog / ${escapeHtml(article.slug)}</p>
       <h1>${escapeHtml(article.title)}</h1>
       <div class="article-meta">
         <span>Status: ${escapeHtml(article.status)}</span>
         <span>Created: ${escapeHtml(createdAt)}</span>
       </div>
-      <div class="article-content">${escapeHtml(article.content)}</div>
+      <div class="article-content">
+        ${article.content.replace(/\n/g, '<br/>')}
+      </div>
     `;
 
     res.status(200).setHeader('Content-Type', 'text/html; charset=utf-8');
@@ -117,15 +140,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
       })
     );
   } catch (error) {
-    console.error('Failed to load blog article', error);
+    console.error('Failed to load article', error);
+
     res.status(500).setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.send(
-      renderPage({
-        title: 'Server error',
-        seoTitle: 'Server error — Crypto Bot',
-        seoDescription: 'Unable to load article.',
-        body: '<h1>Server error</h1><p style="color:#9fb2d8;">Unable to load this article right now.</p>'
-      })
-    );
+    res.send(`
+      <h1>Server error</h1>
+      <p>Something went wrong</p>
+    `);
   }
 }
