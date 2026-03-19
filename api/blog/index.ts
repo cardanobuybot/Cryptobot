@@ -23,11 +23,35 @@ function renderPage(body: string): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog — Crypto Bot</title>
-  <meta name="description" content="Crypto Bot blog about TON, Telegram bots, and crypto payments">
+
+  <title>Crypto Bot Blog — TON, Telegram Bots, and Crypto Payments</title>
+  <meta
+    name="description"
+    content="Crypto Bot blog with guides, tutorials, and insights about TON, Telegram bots, wallets, and crypto payments."
+  >
   <meta name="robots" content="index,follow">
+
   <link rel="canonical" href="https://www.cryptobot.ltd/blog">
+
+  <meta property="og:title" content="Crypto Bot Blog — TON, Telegram Bots, and Crypto Payments">
+  <meta
+    property="og:description"
+    content="Guides, tutorials, and insights about TON, Telegram bots, wallets, and crypto payments."
+  >
+  <meta property="og:url" content="https://www.cryptobot.ltd/blog">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.cryptobot.ltd/cryptobot.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Crypto Bot Blog — TON, Telegram Bots, and Crypto Payments">
+  <meta
+    name="twitter:description"
+    content="Guides, tutorials, and insights about TON, Telegram bots, wallets, and crypto payments."
+  >
+  <meta name="twitter:image" content="https://www.cryptobot.ltd/cryptobot.jpg">
+
   <link rel="stylesheet" href="https://www.cryptobot.ltd/styles.css">
+
   <style>
     .blog-shell { padding: 44px 0 70px; }
     .blog-wrap { width: min(980px, 92%); margin: 0 auto; }
@@ -54,11 +78,11 @@ function renderPage(body: string): string {
       font-size: 24px;
       line-height: 1.3;
     }
-    .blog-item a {
+    .blog-item h2 a {
       color: #eaf4ff;
       text-decoration: none;
     }
-    .blog-item a:hover {
+    .blog-item h2 a:hover {
       text-decoration: underline;
     }
     .blog-meta {
@@ -69,6 +93,17 @@ function renderPage(body: string): string {
     .blog-excerpt {
       color: #dbe7fb;
       line-height: 1.7;
+    }
+    .breadcrumbs {
+      margin-bottom: 12px;
+      color: #9fb2d8;
+    }
+    .breadcrumbs a {
+      color: #9fb2d8;
+      text-decoration: none;
+    }
+    .breadcrumbs a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -82,7 +117,6 @@ function renderPage(body: string): string {
       <nav class="quick-nav">
         <a href="/">Home</a>
         <a href="/blog">Blog</a>
-        <a href="/ai-articles.html">AI Admin</a>
         <a href="/contact.html">Contact</a>
       </nav>
     </div>
@@ -133,6 +167,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
         <p class="breadcrumbs"><a href="/">Home</a> / Blog</p>
         <h1>Crypto Bot Blog</h1>
         <p style="color:#9fb2d8;">Guides, tutorials, and insights about TON, Telegram bots, and crypto payments.</p>
+
         <div class="blog-list">
           ${articles
             .map((article) => {
@@ -144,10 +179,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
               return `
                 <article class="blog-item">
                   <h2>
-                    <a href="/blog/${escapeHtml(article.slug)}">${escapeHtml(article.title)}</a>
+                    <a href="/blog/${escapeHtml(article.slug)}">
+                      ${escapeHtml(article.title)}
+                    </a>
                   </h2>
-                  <div class="blog-meta">Published: ${escapeHtml(createdAt)}</div>
-                  <div class="blog-excerpt">${escapeHtml(article.excerpt ?? '')}</div>
+
+                  <div class="blog-meta">
+                    Published: ${escapeHtml(createdAt)}
+                  </div>
+
+                  <div class="blog-excerpt">
+                    ${escapeHtml(article.excerpt ?? '')}
+                  </div>
                 </article>
               `;
             })
@@ -165,6 +208,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
   } catch (error) {
     console.error('Failed to load blog index', error);
     res.status(500).setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.send('<h1>Server error</h1><p>Unable to load blog index.</p>');
+    res.send(
+      renderPage(`
+        <p class="breadcrumbs"><a href="/">Home</a> / Blog</p>
+        <h1>Server error</h1>
+        <p style="color:#9fb2d8;">Unable to load blog index.</p>
+      `)
+    );
   }
 }
