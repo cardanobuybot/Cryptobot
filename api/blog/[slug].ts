@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { getArticleBySlug, getRelatedArticles } from '../../lib/articles.js';
+import { getArticleBySlug, getSmartRelatedArticles } from '../../lib/articles.js';
 
 function escapeHtml(value: string): string {
   return value
@@ -202,7 +202,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
       return;
     }
 
-    const related = await getRelatedArticles(article.id, article.source_topic ?? null);
+    const related = await getSmartRelatedArticles(
+      article.id,
+      article.title,
+      article.source_topic ?? null
+    );
 
     const createdAt =
       article.created_at instanceof Date
