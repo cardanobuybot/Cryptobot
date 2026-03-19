@@ -125,19 +125,71 @@ function renderMarkdown(md: string): string {
 function renderPage(input: {
   title: string;
   body: string;
+  slug?: string;
   seoTitle?: string;
   seoDescription?: string;
+  publishedAt?: string;
 }): string {
+  const canonicalUrl = input.slug
+    ? `https://www.cryptobot.ltd/blog/${input.slug}`
+    : 'https://www.cryptobot.ltd/blog';
+
+  const schema = input.slug
+    ? `
+  <script type="application/ld+json">
+  ${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: input.seoTitle ?? input.title,
+    description: input.seoDescription ?? input.title,
+    image: 'https://www.cryptobot.ltd/cryptobot.jpg',
+    author: {
+      '@type': 'Organization',
+      name: 'Crypto Bot'
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Crypto Bot',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.cryptobot.ltd/cryptobot.jpg'
+      }
+    },
+    datePublished: input.publishedAt ?? new Date().toISOString(),
+    dateModified: input.publishedAt ?? new Date().toISOString(),
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl
+    }
+  })}
+  </script>`
+    : '';
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${escapeHtml(input.seoTitle ?? input.title)}</title>
+
   <meta name="description" content="${escapeHtml(input.seoDescription ?? input.title)}">
   <meta name="robots" content="index,follow">
+
+  <link rel="canonical" href="${canonicalUrl}">
+
+  <meta property="og:title" content="${escapeHtml(input.seoTitle ?? input.title)}">
+  <meta property="og:description" content="${escapeHtml(input.seoDescription ?? input.title)}">
+  <meta property="og:url" content="${canonicalUrl}">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://www.cryptobot.ltd/cryptobot.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeHtml(input.seoTitle ?? input.title)}">
+  <meta name="twitter:description" content="${escapeHtml(input.seoDescription ?? input.title)}">
+  <meta name="twitter:image" content="https://www.cryptobot.ltd/cryptobot.jpg">
+
   <link rel="stylesheet" href="https://www.cryptobot.ltd/styles.css">
-  <link rel="canonical" href="https://www.cryptobot.ltd/blog/${slug}">
+  ${schema}
 </head>
 <body>
   <header class="site-header">
@@ -149,7 +201,6 @@ function renderPage(input: {
       <nav class="quick-nav">
         <a href="/">Home</a>
         <a href="/blog">Blog</a>
-        <a href="/ai-articles.html">AI Admin</a>
         <a href="/contact.html">Contact</a>
       </nav>
     </div>
@@ -214,6 +265,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
         ? article.created_at.toISOString().slice(0, 10)
         : String(article.created_at).slice(0, 10);
 
+    const publishedAt =
+      article.created_at instanceof Date
+        ? article.created_at.toISOString()
+        : new Date(String(article.created_at)).toISOString();
+
     const relatedHtml = related.length
       ? `
         <section class="related-articles">
@@ -247,8 +303,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
     res.send(
       renderPage({
         title: article.title,
+        slug: article.slug,
         seoTitle: `${article.title} — Crypto Bot`,
         seoDescription: article.title,
+        publishedAt,
         body
       })
     );
