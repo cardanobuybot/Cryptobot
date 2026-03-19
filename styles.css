@@ -628,3 +628,30 @@ footer {
 .related-articles a:hover {
     text-decoration: underline;
 }
+.related-articles {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+}
+
+.related-articles h2 {
+    margin-bottom: 14px;
+}
+
+.related-articles ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.related-articles li {
+    margin-bottom: 10px;
+}
+
+.related-articles a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.related-articles a:hover {
+    text-decoration: underline;
+}
