@@ -26,6 +26,7 @@ function renderPage(body: string): string {
   <title>Blog — Crypto Bot</title>
   <meta name="description" content="Crypto Bot blog about TON, Telegram bots, and crypto payments">
   <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://www.cryptobot.ltd/blog">
   <link rel="stylesheet" href="https://www.cryptobot.ltd/styles.css">
   <style>
     .blog-shell { padding: 44px 0 70px; }
