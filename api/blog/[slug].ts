@@ -1,6 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { getPool } from '../../lib/db.js';
-import { getArticleBySlug } from '../../lib/articles.js';
+import { getArticleBySlug, getRelatedArticles } from '../../lib/articles.js';
 
 function escapeHtml(value: string): string {
   return value
@@ -19,23 +18,6 @@ function getSlug(req: VercelRequest): string {
   return typeof value === 'string' ? value : '';
 }
 
-async function getRelatedArticles(currentId: number) {
-  const pool = getPool();
-  const result = await pool.query(
-    `
-    SELECT id, title, slug
-    FROM articles
-    WHERE id != $1
-      AND status = 'published'
-    ORDER BY created_at DESC
-    LIMIT 3
-    `,
-    [currentId]
-  );
-
-  return result.rows;
-}
-
 function renderInlineMarkdown(text: string): string {
   return escapeHtml(text)
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
@@ -52,9 +34,7 @@ function renderMarkdown(md: string): string {
 
   let text = md.replace(/```([\w-]*)\n?([\s\S]*?)```/g, (_, _lang, code) => {
     const placeholder = `@@CODEBLOCK_${codeBlocks.length}@@`;
-    codeBlocks.push(
-      `<pre><code>${escapeHtml(String(code).trim())}</code></pre>`
-    );
+    codeBlocks.push(`<pre><code>${escapeHtml(String(code).trim())}</code></pre>`);
     return placeholder;
   });
 
@@ -222,7 +202,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
       return;
     }
 
-    const related = await getRelatedArticles(article.id);
+    const related = await getRelatedArticles(article.id, article.source_topic ?? null);
 
     const createdAt =
       article.created_at instanceof Date
@@ -231,12 +211,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
 
     const relatedHtml = related.length
       ? `
-        <section class="related-articles" style="margin-top:40px;">
+        <section class="related-articles">
           <h2>Related Articles</h2>
           <ul>
             ${related
               .map(
-                (item: { slug: string; title: string }) =>
+                (item) =>
                   `<li><a href="/blog/${escapeHtml(item.slug)}">${escapeHtml(item.title)}</a></li>`
               )
               .join('')}
