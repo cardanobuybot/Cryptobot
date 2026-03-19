@@ -2,8 +2,8 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { timingSafeEqual } from 'node:crypto';
 import { getEnv } from '../../lib/env.js';
 import { generateAndStoreArticle } from '../../lib/articles.js';
-import { TOPICS } from '../../lib/topics.js';
 import { getPool } from '../../lib/db.js';
+import { TOPICS } from '../../lib/topics.js';
 
 function isAuthorized(req: VercelRequest): boolean {
   const provided = req.headers['x-agent-secret'];
@@ -18,23 +18,25 @@ function isAuthorized(req: VercelRequest): boolean {
   );
 }
 
-// 🔥 ВЫБОР ТЕМЫ БЕЗ ДУБЛЕЙ
-async function pickUnusedTopic() {
+async function pickUniqueTopic() {
   const pool = getPool();
 
   const used = await pool.query(
     `SELECT DISTINCT source_topic FROM articles`
   );
 
-  const usedTopics = new Set(used.rows.map(r => r.source_topic));
+  const usedSet = new Set(
+    used.rows.map((r: any) => r.source_topic)
+  );
 
-  const unused = TOPICS.filter(t => !usedTopics.has(t.topic));
+  const unused = TOPICS.filter(t => !usedSet.has(t.topic));
 
+  // 🔥 если есть неиспользованные → берём их
   if (unused.length > 0) {
     return unused[Math.floor(Math.random() * unused.length)];
   }
 
-  // если все использованы → просто случайная
+  // 🔥 если все использованы → начинаем заново (НО можно улучшить позже)
   return TOPICS[Math.floor(Math.random() * TOPICS.length)];
 }
 
@@ -48,7 +50,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const selected = await pickUnusedTopic();
+    const selected = await pickUniqueTopic();
 
     const article = await generateAndStoreArticle({
       topic: selected.topic,
