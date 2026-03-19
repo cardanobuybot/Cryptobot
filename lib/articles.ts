@@ -18,6 +18,13 @@ export type BlogArticle = {
   content: string;
   status: ArticleStatus;
   created_at: Date | string;
+  source_topic?: string | null;
+};
+
+export type RelatedArticle = {
+  id: number;
+  slug: string;
+  title: string;
 };
 
 export async function getArticleBySlug(slug: string): Promise<BlogArticle | null> {
@@ -28,14 +35,51 @@ export async function getArticleBySlug(slug: string): Promise<BlogArticle | null
 
   const pool = getPool();
   const result = await pool.query<BlogArticle>(
-    `SELECT id, slug, title, content, status, created_at
+    `SELECT id, slug, title, content, status, created_at, source_topic
      FROM articles
      WHERE slug = $1
+       AND status = 'published'
      LIMIT 1`,
     [normalizedSlug]
   );
 
   return result.rows[0] ?? null;
+}
+
+export async function getRelatedArticles(
+  currentId: number,
+  sourceTopic?: string | null
+): Promise<RelatedArticle[]> {
+  const pool = getPool();
+
+  if (sourceTopic) {
+    const sameTopicResult = await pool.query<RelatedArticle>(
+      `SELECT id, slug, title
+       FROM articles
+       WHERE id != $1
+         AND status = 'published'
+         AND source_topic = $2
+       ORDER BY created_at DESC
+       LIMIT 3`,
+      [currentId, sourceTopic]
+    );
+
+    if (sameTopicResult.rows.length > 0) {
+      return sameTopicResult.rows;
+    }
+  }
+
+  const fallbackResult = await pool.query<RelatedArticle>(
+    `SELECT id, slug, title
+     FROM articles
+     WHERE id != $1
+       AND status = 'published'
+     ORDER BY created_at DESC
+     LIMIT 3`,
+    [currentId]
+  );
+
+  return fallbackResult.rows;
 }
 
 export async function generateAndStoreArticle(input: {
@@ -54,7 +98,15 @@ export async function generateAndStoreArticle(input: {
   const pool = getPool();
   const result = await pool.query<StoredArticle>(
     `INSERT INTO articles (
-      slug, title, excerpt, content, status, seo_title, seo_description, source_topic, published_at
+      slug,
+      title,
+      excerpt,
+      content,
+      status,
+      seo_title,
+      seo_description,
+      source_topic,
+      published_at
     ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
     RETURNING id, slug, status, title`,
     [
