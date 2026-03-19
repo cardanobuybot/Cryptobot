@@ -13,4 +13,4 @@ Disallow: /login/
 Disallow: /wp-admin/
 Disallow: /*.php$
 
-Sitemap: https://cryptobot.ltd/sitemap.xml
+Sitemap: https://www.cryptobot.ltd/sitemap.xml
