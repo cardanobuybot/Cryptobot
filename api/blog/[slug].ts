@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { getPool } from '../../lib/db.js';
 import { getArticleBySlug } from '../../lib/articles.js';
 
 function escapeHtml(value: string): string {
@@ -16,6 +17,23 @@ function getSlug(req: VercelRequest): string {
     return value[0] ?? '';
   }
   return typeof value === 'string' ? value : '';
+}
+
+async function getRelatedArticles(currentId: number) {
+  const pool = getPool();
+  const result = await pool.query(
+    `
+    SELECT id, title, slug
+    FROM articles
+    WHERE id != $1
+      AND status = 'published'
+    ORDER BY created_at DESC
+    LIMIT 3
+    `,
+    [currentId]
+  );
+
+  return result.rows;
 }
 
 function renderInlineMarkdown(text: string): string {
@@ -204,10 +222,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
       return;
     }
 
+    const related = await getRelatedArticles(article.id);
+
     const createdAt =
       article.created_at instanceof Date
         ? article.created_at.toISOString().slice(0, 10)
         : String(article.created_at).slice(0, 10);
+
+    const relatedHtml = related.length
+      ? `
+        <section class="related-articles" style="margin-top:40px;">
+          <h2>Related Articles</h2>
+          <ul>
+            ${related
+              .map(
+                (item: { slug: string; title: string }) =>
+                  `<li><a href="/blog/${escapeHtml(item.slug)}">${escapeHtml(item.title)}</a></li>`
+              )
+              .join('')}
+          </ul>
+        </section>
+      `
+      : '';
 
     const body = `
       <p><a href="/">Home</a> / <a href="/blog">Blog</a> / ${escapeHtml(article.slug)}</p>
@@ -219,6 +255,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
       <div class="article-content">
         ${renderMarkdown(article.content)}
       </div>
+      ${relatedHtml}
     `;
 
     res.status(200).setHeader('Content-Type', 'text/html; charset=utf-8');
