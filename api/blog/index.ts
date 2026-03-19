@@ -26,7 +26,7 @@ function renderPage(body: string): string {
   <title>Blog — Crypto Bot</title>
   <meta name="description" content="Crypto Bot blog about TON, Telegram bots, and crypto payments">
   <meta name="robots" content="index,follow">
-  <link rel="stylesheet" href="https://cryptobot.ltd/styles.css">
+  <link rel="stylesheet" href="https://www.cryptobot.ltd/styles.css">
   <style>
     .blog-shell { padding: 44px 0 70px; }
     .blog-wrap { width: min(980px, 92%); margin: 0 auto; }
@@ -75,7 +75,7 @@ function renderPage(body: string): string {
   <header class="site-header">
     <div class="container header-content">
       <a class="logo" href="/">
-        <img src="https://cryptobot.ltd/cryptobot.jpg" alt="Crypto Bot Logo">
+        <img src="https://www.cryptobot.ltd/cryptobot.jpg" alt="Crypto Bot Logo">
         <span>Crypto Bot</span>
       </a>
       <nav class="quick-nav">
