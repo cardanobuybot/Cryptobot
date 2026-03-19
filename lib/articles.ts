@@ -35,8 +35,8 @@ function normalizeText(value: string): string {
 function tokenize(value: string): string[] {
   const stopWords = new Set([
     'the', 'and', 'for', 'with', 'from', 'into', 'that', 'this', 'how', 'what',
-    'your', 'using', 'used', 'best', 'into', 'are', 'can', 'you', 'via', 'why',
-    'ton', 'crypto', 'telegram', 'bot', 'bots'
+    'your', 'using', 'used', 'best', 'are', 'can', 'you', 'via', 'why',
+    'ton', 'crypto', 'telegram', 'bot', 'bots', 'guide', 'beginner', 'beginners'
   ]);
 
   return Array.from(
@@ -86,6 +86,143 @@ ${links}
 `;
 }
 
+function pickAnchorCandidates(title: string): string[] {
+  const tokens = tokenize(title);
+  const phrases: string[] = [];
+
+  if (tokens.length >= 3) {
+    phrases.push(tokens.slice(0, 3).join(' '));
+  }
+  if (tokens.length >= 2) {
+    phrases.push(tokens.slice(0, 2).join(' '));
+  }
+  if (tokens.length >= 1) {
+    phrases.push(tokens[0]);
+  }
+
+  return Array.from(new Set(phrases.filter((v) => v.length >= 4)));
+}
+
+function splitMarkdownIntoSafeBlocks(content: string): string[] {
+  const parts = content.split(/(```[\s\S]*?```)/g);
+  return parts.filter(Boolean);
+}
+
+function isCodeBlock(block: string): boolean {
+  return block.startsWith('```') && block.endsWith('```');
+}
+
+function isHeadingLine(line: string): boolean {
+  const trimmed = line.trim();
+  return trimmed.startsWith('# ');
+}
+
+function isSubheadingLine(line: string): boolean {
+  const trimmed = line.trim();
+  return trimmed.startsWith('## ') || trimmed.startsWith('### ');
+}
+
+function alreadyHasMarkdownLink(line: string): boolean {
+  return /\[[^\]]+\]\([^)]+\)/.test(line);
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function linkOnePhraseInParagraph(paragraph: string, articles: RelatedArticle[]): { text: string; inserted: number } {
+  let result = paragraph;
+  let inserted = 0;
+
+  for (const article of articles) {
+    if (inserted >= 3) {
+      break;
+    }
+
+    const candidates = pickAnchorCandidates(article.title);
+
+    for (const candidate of candidates) {
+      const markdownLink = `[${candidate}](/blog/${article.slug})`;
+
+      if (result.includes(markdownLink)) {
+        continue;
+      }
+
+      const regex = new RegExp(`\\b(${escapeRegExp(candidate)})\\b`, 'i');
+
+      if (!regex.test(result)) {
+        continue;
+      }
+
+      result = result.replace(regex, markdownLink);
+      inserted += 1;
+      break;
+    }
+  }
+
+  return { text: result, inserted };
+}
+
+function injectInternalLinks(content: string, articles: RelatedArticle[]): string {
+  if (!articles.length) {
+    return content;
+  }
+
+  const blocks = splitMarkdownIntoSafeBlocks(content);
+  let totalInserted = 0;
+
+  const processed = blocks.map((block) => {
+    if (isCodeBlock(block) || totalInserted >= 3) {
+      return block;
+    }
+
+    const lines = block.split(/\r?\n/);
+    const updatedLines = lines.map((line) => {
+      const trimmed = line.trim();
+
+      if (!trimmed) {
+        return line;
+      }
+
+      if (isHeadingLine(line) || isSubheadingLine(line)) {
+        return line;
+      }
+
+      if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+        return line;
+      }
+
+      if (alreadyHasMarkdownLink(line)) {
+        return line;
+      }
+
+      if (totalInserted >= 3) {
+        return line;
+      }
+
+      const linked = linkOnePhraseInParagraph(line, articles);
+      totalInserted += linked.inserted;
+      return linked.text;
+    });
+
+    return updatedLines.join('\n');
+  });
+
+  return processed.join('');
+}
+
+function ensureTonScannerLink(content: string): string {
+  if (content.toLowerCase().includes('tonscanner.io')) {
+    return content;
+  }
+
+  return `${content}
+
+## Explore TON data
+
+You can explore transactions, wallets, and analytics using [TONScanner](https://tonscanner.io).`;
+}
+
 export async function getArticleBySlug(slug: string): Promise<BlogArticle | null> {
   const normalizedSlug = slug.trim();
   if (!normalizedSlug) {
@@ -132,7 +269,10 @@ export async function getSmartRelatedArticles(
     })
     .sort((a, b) => b.score - a.score);
 
-  const strongMatches = ranked.filter((item) => item.score > 0).slice(0, 3).map((item) => item.article);
+  const strongMatches = ranked
+    .filter((item) => item.score > 0)
+    .slice(0, 3)
+    .map((item) => item.article);
 
   if (strongMatches.length > 0) {
     return strongMatches;
@@ -177,8 +317,11 @@ export async function generateAndStoreArticle(input: {
     .slice(0, 3)
     .map((item) => item.article);
 
-  const contentWithLinks =
-    generated.content + buildRelatedReadingMarkdown(relatedForContent);
+  let contentWithLinks = generated.content;
+
+  contentWithLinks = injectInternalLinks(contentWithLinks, relatedForContent);
+  contentWithLinks = ensureTonScannerLink(contentWithLinks);
+  contentWithLinks += buildRelatedReadingMarkdown(relatedForContent);
 
   const result = await pool.query<StoredArticle>(
     `INSERT INTO articles (
