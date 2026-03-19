@@ -136,13 +136,14 @@ function renderPage(input: {
   <title>${escapeHtml(input.seoTitle ?? input.title)}</title>
   <meta name="description" content="${escapeHtml(input.seoDescription ?? input.title)}">
   <meta name="robots" content="index,follow">
-  <link rel="stylesheet" href="https://cryptobot.ltd/styles.css">
+  <link rel="stylesheet" href="https://www.cryptobot.ltd/styles.css">
+  <link rel="canonical" href="https://www.cryptobot.ltd/blog/${slug}">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-content">
       <a class="logo" href="/">
-        <img src="https://cryptobot.ltd/cryptobot.jpg" alt="Crypto Bot Logo">
+        <img src="https://www.cryptobot.ltd/cryptobot.jpg" alt="Crypto Bot Logo">
         <span>Crypto Bot</span>
       </a>
       <nav class="quick-nav">
