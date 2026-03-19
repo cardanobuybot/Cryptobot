@@ -1,16 +1,22 @@
 User-agent: *
 Allow: /
+
+# Static assets
 Allow: /*.css$
 Allow: /*.js$
 Allow: /favicon.ico
-Disallow: /logs/
-Disallow: /mail/
-Disallow: /php-bin/
-Disallow: /tmp/
-Disallow: /ssl/
+
+# Block system / sensitive paths
 Disallow: /admin/
 Disallow: /login/
-Disallow: /wp-admin/
+Disallow: /logs/
+Disallow: /tmp/
+
+# Block dynamic / irrelevant
 Disallow: /*.php$
 
+# Sitemap
 Sitemap: https://www.cryptobot.ltd/sitemap.xml
+
+# Preferred host (important)
+Host: https://www.cryptobot.ltd
