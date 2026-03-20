@@ -1,8 +1,4 @@
 {
-  "builds": [
-    { "src": "api/**/*.ts", "use": "@vercel/node" },
-    { "src": "*.html", "use": "@vercel/static" }
-  ],
   "rewrites": [
     { "source": "/blog", "destination": "/api/blog/index" },
     { "source": "/blog/(.*)", "destination": "/api/blog/$1" },
