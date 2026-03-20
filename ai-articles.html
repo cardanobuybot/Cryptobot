@@ -4,19 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Internal AI Articles — Crypto Bot</title>
-  <meta name="robots" content="noindex,nofollow">
-  <link rel="canonical" href="https://cryptobot.ltd/ai-articles.html">
-  <link rel="stylesheet" href="https://cryptobot.ltd/styles.css">
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+  <meta name="referrer" content="no-referrer">
+  <link rel="canonical" href="https://www.cryptobot.ltd/ai-articles.html">
+  <link rel="stylesheet" href="https://www.cryptobot.ltd/styles.css">
+
   <style>
     .admin-form {
       display: grid;
       gap: 14px;
     }
+
     .admin-form label {
       display: grid;
       gap: 8px;
       font-weight: 600;
     }
+
     .admin-form input[type="text"],
     .admin-form input[type="password"] {
       width: 100%;
@@ -26,51 +30,102 @@
       background: rgba(8, 15, 33, 0.78);
       color: #e6eefb;
     }
+
     .admin-form .checkbox-row {
       display: flex;
       align-items: center;
       gap: 10px;
       font-weight: 500;
     }
+
     .admin-note,
     .admin-result,
     .admin-error {
       white-space: pre-wrap;
       word-break: break-word;
     }
+
     .admin-error {
       color: #ffb4c3;
     }
+
     .admin-result {
       color: #b8f7c6;
+    }
+
+    .admin-warning {
+      border: 1px solid rgba(255, 180, 195, 0.25);
+      background: rgba(67, 20, 32, 0.35);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 20px;
+      color: #ffd5de;
+    }
+
+    .admin-warning strong {
+      color: #ffffff;
     }
   </style>
 </head>
 <body>
-  <header class="site-header"><div class="container header-content"><a class="logo" href="/"><img src="https://cryptobot.ltd/cryptobot.jpg" alt="Crypto Bot Logo"><span>Crypto Bot</span></a><nav class="quick-nav"><a href="/">Home</a><a href="/about.html">About</a><a href="/contact.html">Contact</a></nav></div></header>
+  <header class="site-header">
+    <div class="container header-content">
+      <a class="logo" href="/">
+        <img src="https://www.cryptobot.ltd/cryptobot.jpg" alt="Crypto Bot Logo">
+        <span>Crypto Bot</span>
+      </a>
+      <nav class="quick-nav">
+        <a href="/">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
   <main class="content-page">
     <div class="container">
       <p class="breadcrumbs"><a href="/">Home</a> / Internal AI Articles</p>
+
       <div class="section-title">
         <h1>Internal AI Articles</h1>
-        <p>Private static admin page for manually generating one article through the deployed internal API.</p>
+        <p>Private admin page for manually generating one article through the deployed internal API.</p>
       </div>
 
+      <article class="admin-warning">
+        <strong>Internal use only.</strong>
+        Do not share this page publicly. Do not paste secrets into URLs, chats, or public screenshots.
+      </article>
+
       <article class="panel">
-        <form id="article-form" class="admin-form">
+        <form id="article-form" class="admin-form" autocomplete="off">
           <label>
             Agent secret
-            <input id="agent-secret" type="password" autocomplete="off" placeholder="ARTICLE_AGENT_SECRET">
+            <input
+              id="agent-secret"
+              type="password"
+              autocomplete="new-password"
+              placeholder="ARTICLE_AGENT_SECRET"
+              required
+            >
           </label>
 
           <label>
             Topic
-            <input id="topic" type="text" placeholder="How to accept crypto payments safely" required>
+            <input
+              id="topic"
+              type="text"
+              placeholder="How to accept crypto payments safely"
+              required
+            >
           </label>
 
           <label>
             Keywords
-            <input id="keywords" type="text" placeholder="payments, security, merchants">
+            <input
+              id="keywords"
+              type="text"
+              placeholder="payments, security, merchants"
+            >
           </label>
 
           <label class="checkbox-row">
@@ -78,7 +133,9 @@
             <span>Publish immediately</span>
           </label>
 
-          <button id="submit-button" type="submit" class="btn btn-primary">Generate article</button>
+          <button id="submit-button" type="submit" class="btn btn-primary">
+            Generate article
+          </button>
         </form>
       </article>
 
@@ -91,7 +148,17 @@
       </article>
     </div>
   </main>
-  <footer><div class="container footer-grid"><p>© 2026 Crypto Bot Ltd.</p><div class="footer-links"><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="/legal.html">Legal</a></div></div></footer>
+
+  <footer>
+    <div class="container footer-grid">
+      <p>© 2026 Crypto Bot Ltd.</p>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/legal.html">Legal</a>
+      </div>
+    </div>
+  </footer>
 
   <script>
     (function () {
@@ -105,15 +172,10 @@
       var successOutput = document.getElementById('success-output');
       var errorOutput = document.getElementById('error-output');
       var rawOutput = document.getElementById('raw-output');
-      var params = new URLSearchParams(window.location.search);
-      var initialSecret = params.get('secret');
-
-      if (initialSecret) {
-        secretInput.value = initialSecret;
-      }
 
       form.addEventListener('submit', async function (event) {
         event.preventDefault();
+
         successOutput.textContent = '';
         errorOutput.textContent = '';
         rawOutput.textContent = '';
@@ -156,22 +218,41 @@
 
           var text = await response.text();
           var data;
+
           try {
             data = text ? JSON.parse(text) : null;
           } catch (parseError) {
             data = { raw: text };
           }
 
-          rawOutput.textContent = typeof data === 'object' && data !== null ? JSON.stringify(data, null, 2) : String(data);
+          rawOutput.textContent =
+            typeof data === 'object' && data !== null
+              ? JSON.stringify(data, null, 2)
+              : String(data);
 
           if (!response.ok) {
-            throw new Error(data && data.error ? data.error : 'Request failed with status ' + response.status);
+            throw new Error(
+              data && data.error
+                ? data.error
+                : 'Request failed with status ' + response.status
+            );
           }
 
-          successOutput.textContent = 'Title: ' + data.title + '\nStatus: ' + data.status + '\nSlug: ' + data.slug + '\nLink: /blog/' + data.slug;
+          var articleUrl = data && data.slug
+            ? 'https://www.cryptobot.ltd/blog/' + data.slug
+            : '';
+
+          successOutput.textContent =
+            'Title: ' + (data && data.title ? data.title : '—') + '\n' +
+            'Status: ' + (data && data.status ? data.status : '—') + '\n' +
+            'Slug: ' + (data && data.slug ? data.slug : '—') + '\n' +
+            'Link: ' + articleUrl;
+
           statusLine.textContent = 'Success.';
+          secretInput.value = '';
         } catch (error) {
-          errorOutput.textContent = error instanceof Error ? error.message : 'Request failed.';
+          errorOutput.textContent =
+            error instanceof Error ? error.message : 'Request failed.';
           statusLine.textContent = 'Request failed.';
         } finally {
           submitButton.disabled = false;
