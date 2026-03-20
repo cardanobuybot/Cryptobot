@@ -28,10 +28,14 @@
   function loadGA() {
     if (window.__cbGaLoaded) return;
     window.__cbGaLoaded = true;
+
     window.dataLayer = window.dataLayer || [];
-    window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
-    gtag('js', new Date());
-    gtag('config', GA_ID, { anonymize_ip: true });
+    window.gtag = window.gtag || function () {
+      window.dataLayer.push(arguments);
+    };
+
+    window.gtag('js', new Date());
+    window.gtag('config', GA_ID, { anonymize_ip: true });
 
     var s = document.createElement('script');
     s.async = true;
@@ -41,7 +45,10 @@
 
   function save(choice) {
     localStorage.setItem(STORAGE_KEY, choice);
-    document.cookie = STORAGE_KEY + '=' + choice + '; path=/; max-age=' + (60*60*24*180) + '; SameSite=Lax';
+    document.cookie =
+      STORAGE_KEY + '=' + choice +
+      '; path=/; max-age=' + (60 * 60 * 24 * 180) +
+      '; SameSite=Lax; Secure';
   }
 
   function makeBanner() {
@@ -53,6 +60,7 @@
       '<button type="button" class="cookie-btn cookie-btn-accept">Accept</button>' +
       '<button type="button" class="cookie-btn cookie-btn-reject">Reject</button>' +
       '</div>';
+
     document.body.appendChild(b);
 
     b.querySelector('.cookie-btn-accept').addEventListener('click', function () {
@@ -80,7 +88,10 @@
       loadGA();
       return;
     }
-    if (choice === 'rejected') return;
+
+    if (choice === 'rejected') {
+      return;
+    }
 
     makeBanner();
   }
