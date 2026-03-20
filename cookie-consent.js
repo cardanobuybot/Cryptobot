@@ -29,7 +29,7 @@
     if (window.__cbGaLoaded) return;
     window.__cbGaLoaded = true;
     window.dataLayer = window.dataLayer || [];
-    window.gtag = window.gtag || function(){dataLayer.push(arguments);};
+    window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
     gtag('js', new Date());
     gtag('config', GA_ID, { anonymize_ip: true });
 
