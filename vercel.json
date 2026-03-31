@@ -4,6 +4,16 @@
       "source": "/zh.html",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/ru.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
     }
   ],
   "rewrites": [
