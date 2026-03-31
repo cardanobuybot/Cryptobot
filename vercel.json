@@ -1,20 +1,36 @@
 {
   "redirects": [
+    { "source": "/zh.html", "destination": "/", "permanent": true },
+    { "source": "/ru.html", "destination": "/", "permanent": true },
+    { "source": "/index.html", "destination": "/", "permanent": true },
+
+    { "source": "/about.html", "destination": "/about", "permanent": true },
+    { "source": "/contact.html", "destination": "/contact", "permanent": true },
+    { "source": "/crypto-pay.html", "destination": "/crypto-pay", "permanent": true },
+    { "source": "/p2p.html", "destination": "/p2p", "permanent": true },
+    { "source": "/exchange.html", "destination": "/exchange", "permanent": true },
+    { "source": "/wallet.html", "destination": "/wallet", "permanent": true },
+    { "source": "/fees.html", "destination": "/fees", "permanent": true },
+    { "source": "/legal.html", "destination": "/legal", "permanent": true },
+    { "source": "/privacy.html", "destination": "/privacy", "permanent": true },
+    { "source": "/terms.html", "destination": "/terms", "permanent": true },
+    { "source": "/security.html", "destination": "/security", "permanent": true },
+    { "source": "/cookie-policy.html", "destination": "/cookie-policy", "permanent": true },
+    { "source": "/ai-articles.html", "destination": "/ai-articles", "permanent": true },
+    { "source": "/amp.html", "destination": "/", "permanent": true },
+
     {
-      "source": "/zh.html",
-      "destination": "/",
+      "source": "/guides-accept-crypto-payments.html",
+      "destination": "/guides/accept-crypto-payments",
       "permanent": true
     },
     {
-      "source": "/ru.html",
-      "destination": "/",
+      "source": "/guides-buy-crypto-to-telegram-wallet.html",
+      "destination": "/guides/buy-crypto-to-telegram-wallet",
       "permanent": true
     },
-    {
-      "source": "/index.html",
-      "destination": "/",
-      "permanent": true
-    }
+
+    { "source": "/blog.html", "destination": "/blog", "permanent": true }
   ],
   "rewrites": [
     { "source": "/blog", "destination": "/api/blog/index" },
