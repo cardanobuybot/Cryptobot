@@ -1,16 +1,61 @@
 User-agent: *
 Allow: /
-Allow: /*.css$
-Allow: /*.js$
-Allow: /favicon.ico
-Disallow: /logs/
-Disallow: /mail/
-Disallow: /php-bin/
-Disallow: /tmp/
-Disallow: /ssl/
+
+# AI crawlers — explicitly allowed
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Block sensitive paths only
 Disallow: /admin/
 Disallow: /login/
-Disallow: /wp-admin/
+Disallow: /logs/
+Disallow: /tmp/
 Disallow: /*.php$
 
-Sitemap: https://cryptobot.ltd/sitemap.xml
+# Content signals (Cloudflare format)
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+
+# Sitemap
+Sitemap: https://www.cryptobot.ltd/sitemap.xml
