@@ -129,12 +129,15 @@
             <img src="https://www.cryptobot.ltd/cryptobot.jpg" alt="Crypto Bot Logo">
             <span>Crypto Bot</span>
         </a>
-        <nav class="quick-nav">
-            <a href="/">Home</a>
-            <a href="/p2p.html">P2P</a>
-            <a href="/wallet.html">Wallet</a>
-            <a href="/blog">Blog</a>
-        </nav>
+                <div class="nav-dots-wrap">
+            <button class="nav-dots-btn" id="navDotsBtn" aria-label="Menu" aria-expanded="false">&#8943;</button>
+            <nav class="nav-dropdown" id="navDropdown" aria-label="Main">
+                <a href="/#features" onclick="closeNav()">Features</a>
+                <a href="/#how" onclick="closeNav()">How it works</a>
+                <a href="/#faq" onclick="closeNav()">FAQ</a>
+                <a href="/#social" onclick="closeNav()">Community</a>
+            </nav>
+        </div>
     </div>
 </header>
 
@@ -224,5 +227,19 @@
         </div>
     </div>
 </footer>
+<script>
+    var btn = document.getElementById("navDotsBtn");
+    var nav = document.getElementById("navDropdown");
+    btn.addEventListener("click", function(e) {
+        e.stopPropagation();
+        var open = nav.classList.toggle("open");
+        btn.setAttribute("aria-expanded", open);
+    });
+    document.addEventListener("click", function() {
+        nav.classList.remove("open");
+        btn.setAttribute("aria-expanded", false);
+    });
+    function closeNav() { nav.classList.remove("open"); btn.setAttribute("aria-expanded", false); }
+</script>
 </body>
 </html>
