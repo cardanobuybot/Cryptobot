@@ -195,6 +195,103 @@
     </script>
 </head>
 <body>
+<canvas id="bgCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;"></canvas>
+<script>
+(function(){
+  var c = document.getElementById('bgCanvas');
+  var ctx = c.getContext('2d');
+  var W, H, candles = [], COLS = 28, scroll = 0;
+
+  function resize() {
+    W = c.width = window.innerWidth;
+    H = c.height = window.innerHeight;
+  }
+
+  function randBetween(a, b) { return a + Math.random() * (b - a); }
+
+  function genCandle(x, prevClose) {
+    var isGreen = Math.random() > 0.45;
+    var bodyH = randBetween(8, 40);
+    var open = prevClose || randBetween(H * 0.3, H * 0.7);
+    var close = isGreen ? open + bodyH : open - bodyH;
+    var high = Math.min(open, close) - randBetween(4, 18);
+    var low = Math.max(open, close) + randBetween(4, 18);
+    return { x: x, open: open, close: close, high: high, low: low, green: isGreen };
+  }
+
+  function initCandles() {
+    candles = [];
+    var colW = W / COLS;
+    var prev = H * 0.5;
+    for (var i = 0; i < COLS + 4; i++) {
+      var cd = genCandle(i * colW + colW / 2, prev);
+      candles.push(cd);
+      prev = cd.close;
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // dark gradient background
+    var grad = ctx.createLinearGradient(0, 0, 0, H);
+    grad.addColorStop(0, '#060b1a');
+    grad.addColorStop(1, '#0a1228');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    // subtle grid lines
+    ctx.strokeStyle = 'rgba(99,179,255,0.04)';
+    ctx.lineWidth = 1;
+    for (var y = 0; y < H; y += 60) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+    }
+
+    var colW = W / COLS;
+    var candleW = colW * 0.5;
+    var offsetX = -(scroll % colW);
+
+    ctx.globalAlpha = 0.18;
+    candles.forEach(function(cd) {
+      var x = cd.x + offsetX;
+      if (x < -colW || x > W + colW) return;
+      var color = cd.green ? '#22c55e' : '#ef4444';
+      ctx.strokeStyle = color;
+      ctx.fillStyle = color;
+      ctx.lineWidth = 1.5;
+
+      // wick
+      ctx.beginPath();
+      ctx.moveTo(x, cd.high);
+      ctx.lineTo(x, cd.low);
+      ctx.stroke();
+
+      // body
+      var top = Math.min(cd.open, cd.close);
+      var h = Math.abs(cd.close - cd.open);
+      ctx.fillRect(x - candleW / 2, top, candleW, Math.max(h, 2));
+    });
+    ctx.globalAlpha = 1;
+
+    scroll += 0.4;
+
+    // add new candle when scrolled one column
+    if (scroll % colW < 0.5) {
+      var last = candles[candles.length - 1];
+      var newX = last.x + colW;
+      candles.push(genCandle(newX, last.close));
+      if (candles.length > COLS + 8) candles.shift();
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', function() { resize(); initCandles(); });
+  resize();
+  initCandles();
+  draw();
+})();
+</script>
 <header class="site-header">
     <div class="container header-content">
         <a class="logo" href="https://www.cryptobot.ltd/" aria-label="Crypto Bot home">
