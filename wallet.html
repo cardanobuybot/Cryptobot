@@ -24,7 +24,7 @@
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "Telegram Crypto Wallet \u2014 Crypto Bot",
+  "name": "Telegram Crypto Wallet — Crypto Bot",
   "url": "https://www.cryptobot.ltd/wallet",
   "description": "Use Crypto Bot wallet in Telegram to store, receive, send, and manage crypto assets in one simple interface.",
   "inLanguage": "en"
@@ -41,7 +41,15 @@
       "name": "What can I do with the Crypto Bot wallet?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "You can store, receive, send, and manage crypto assets directly inside Telegram using Crypto Bot wallet."
+        "text": "You can store, receive, send, and manage crypto assets directly inside Telegram using Crypto Bot wallet. The wallet supports TON and other major crypto assets, letting you check balances, generate receive addresses, and send funds without leaving Telegram."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to create a separate account to use the wallet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The Crypto Bot wallet works through your existing Telegram account. There is no separate registration, app download, or KYC process required to get started."
       }
     },
     {
@@ -49,7 +57,23 @@
       "name": "Is the wallet connected to P2P and Exchange?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. The wallet works alongside P2P and Exchange flows, so users can move funds between storage, trading, and payments more easily."
+        "text": "Yes. The wallet works alongside P2P and Exchange flows, so users can move funds between storage, trading, and payments more easily within one Telegram-native workflow."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which cryptocurrencies does the wallet support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Crypto Bot wallet supports TON and a range of major crypto assets. Check the bot directly for the current supported asset list, as it may be updated over time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I receive crypto into my Telegram wallet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Open Crypto Bot in Telegram, navigate to your wallet, select the asset you want to receive, and copy your deposit address or share a QR code. Funds sent to that address will appear in your balance once confirmed on-chain."
       }
     },
     {
@@ -57,75 +81,22 @@
       "name": "Who is this wallet for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "It is useful for beginners, active Telegram users, traders, and businesses that want a simple crypto workflow inside Telegram."
+        "text": "The Telegram crypto wallet is useful for beginners, active Telegram users, traders, and businesses that want a simple crypto workflow inside Telegram without switching between multiple apps."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it safe to store crypto in the Telegram wallet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Safety depends on your account security practices. Enable Telegram two-factor authentication, never share your credentials, and always access the wallet through the official Crypto Bot link. See the Security page for a full guide."
       }
     }
   ]
 }
 </script>
 
-    <style>
-        .content-page {
-            padding: 56px 0 80px;
-        }
-
-        .page-wrap {
-            width: min(980px, 92%);
-            margin: 0 auto;
-        }
-
-        .panel {
-            border: 1px solid rgba(145, 168, 222, 0.2);
-            background: rgba(22, 32, 57, 0.72);
-            border-radius: 18px;
-            padding: 28px;
-            box-shadow: 0 18px 45px rgba(0, 8, 30, 0.45);
-        }
-
-        .panel + .panel {
-            margin-top: 20px;
-        }
-
-        .panel h2 {
-            margin-bottom: 12px;
-        }
-
-        .panel p,
-        .panel li {
-            color: #dbe7fb;
-            line-height: 1.75;
-        }
-
-        .panel ul {
-            margin: 0 0 16px 20px;
-        }
-
-        .breadcrumbs {
-            color: #9fb2d8;
-            margin-bottom: 14px;
-        }
-
-        .breadcrumbs a {
-            color: #9fb2d8;
-            text-decoration: none;
-        }
-
-        .breadcrumbs a:hover {
-            text-decoration: underline;
-        }
-
-        .wallet-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 18px;
-        }
-
-        .wallet-links a {
-            text-decoration: none;
-        }
-    </style>
-<script type="application/ld+json">
+    <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -145,6 +116,34 @@
   ]
 }
 </script>
+
+    <style>
+        .content-page { padding: 56px 0 80px; }
+        .page-wrap { width: min(980px, 92%); margin: 0 auto; }
+        .panel { border: 1px solid rgba(145, 168, 222, 0.2); background: rgba(22, 32, 57, 0.72); border-radius: 18px; padding: 28px; box-shadow: 0 18px 45px rgba(0, 8, 30, 0.45); }
+        .panel + .panel { margin-top: 20px; }
+        .panel h2 { margin-bottom: 12px; }
+        .panel p, .panel li { color: #dbe7fb; line-height: 1.75; }
+        .panel ul, .panel ol { margin: 0 0 16px 20px; }
+        .breadcrumbs { color: #9fb2d8; margin-bottom: 14px; }
+        .breadcrumbs a { color: #9fb2d8; text-decoration: none; }
+        .breadcrumbs a:hover { text-decoration: underline; }
+        .wallet-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+        .wallet-links a { text-decoration: none; }
+        .faq-item { border-bottom: 1px solid rgba(145,168,222,0.15); padding: 14px 0; }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-item summary { font-weight: 600; cursor: pointer; color: #eaf4ff; list-style: none; padding-right: 20px; position: relative; }
+        .faq-item summary::after { content: "+"; position: absolute; right: 0; top: 0; color: #9fb2d8; }
+        .faq-item[open] summary::after { content: "2"; }
+        .faq-item p { margin-top: 10px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 16px; }
+        .feature-card { background: rgba(145,168,222,0.07); border: 1px solid rgba(145,168,222,0.15); border-radius: 12px; padding: 18px; }
+        .feature-card h3 { margin: 0 0 8px; font-size: 1rem; color: #eaf4ff; }
+        .feature-card p { margin: 0; font-size: 0.92rem; }
+        .compare-table { width: 100%; border-collapse: collapse; margin-top: 14px; }
+        .compare-table th, .compare-table td { border-bottom: 1px solid rgba(145,168,222,0.15); padding: 12px 10px; text-align: left; color: #dbe7fb; line-height: 1.6; }
+        .compare-table th { color: #eaf4ff; font-weight: 700; }
+    </style>
 </head>
 <body>
 <header class="site-header">
@@ -153,7 +152,7 @@
             <img src="https://www.cryptobot.ltd/cryptobot.jpg" alt="Crypto Bot Logo">
             <span>Crypto Bot</span>
         </a>
-                <div class="nav-dots-wrap">
+        <div class="nav-dots-wrap">
             <button class="nav-dots-btn" id="navDotsBtn" aria-label="Menu" aria-expanded="false">&#8943;</button>
             <nav class="nav-dropdown" id="navDropdown" aria-label="Main">
                 <a href="/#features" onclick="closeNav()">Features</a>
@@ -175,35 +174,154 @@
         </div>
 
         <article class="panel">
+            <p>
+                The Crypto Bot wallet gives you a fully functional <strong>TON wallet inside Telegram</strong> — no separate app, no extra registration, and no friction. Whether you are new to crypto or an experienced user, you can store assets, generate receive addresses, send funds to contacts, and connect your balance to P2P trades and exchange flows, all from inside your existing Telegram account.
+            </p>
+        </article>
+
+        <article class="panel">
             <h2>What the wallet helps you do</h2>
             <p>
                 The Crypto Bot wallet is designed for people who want a fast and practical way to use crypto directly inside Telegram.
                 Instead of switching between multiple apps, you can manage balances, receive funds, and move assets in one familiar interface.
+                This is especially valuable if you already use Telegram for daily communication — your crypto workflow lives in the same place.
+            </p>
+            <p>
+                The wallet acts as a foundation for everything else in Crypto Bot. When you buy crypto through P2P, the funds land in your wallet. When you place an exchange order, the wallet provides the balance. When a customer pays an invoice, the payment arrives in your wallet. It is the central hub of your Telegram crypto experience.
             </p>
             <ul>
-                <li>Track balances in one place</li>
-                <li>Receive and send crypto quickly</li>
+                <li>Track balances for multiple assets in one place</li>
+                <li>Receive crypto by sharing your deposit address or QR code</li>
+                <li>Send crypto to any supported address or Telegram username</li>
                 <li>Use wallet funds together with P2P and Exchange flows</li>
                 <li>Stay inside Telegram for everyday crypto actions</li>
+                <li>No app switching — everything happens in one chat interface</li>
             </ul>
         </article>
 
         <article class="panel">
-            <h2>Why a Telegram wallet is useful</h2>
+            <h2>How to use the Telegram crypto wallet — step by step</h2>
             <p>
-                A Telegram crypto wallet is especially useful for users who want speed and simplicity.
-                It can be a practical option for beginners, active traders, creators, and businesses that already work inside Telegram.
+                Getting started with the Crypto Bot wallet is straightforward. There is no separate sign-up process. Your Telegram account is your identity, and the bot handles the rest.
             </p>
+            <ol>
+                <li><strong>Open Crypto Bot in Telegram</strong> — Use the official link or search for the bot. Tap Start to begin.</li>
+                <li><strong>Navigate to Wallet</strong> — Select the Wallet option from the main menu. You will see your current balance and available assets.</li>
+                <li><strong>Add funds</strong> — Tap Deposit to generate your receive address. Share the address or QR code with anyone sending you crypto. For first-time users, you can also buy crypto via P2P directly within the bot.</li>
+                <li><strong>Send crypto</strong> — Tap Send, enter the recipient address or Telegram username, specify the amount, and confirm. Your balance will update once the transaction is processed.</li>
+                <li><strong>Monitor your balance</strong> — Check the wallet screen at any time to see your holdings across all supported assets.</li>
+                <li><strong>Move to exchange or P2P</strong> — When you want to trade or sell, move seamlessly into the exchange or P2P flow directly from the wallet menu.</li>
+            </ol>
+        </article>
+
+        <article class="panel">
+            <h2>Key features of the Crypto Bot Telegram wallet</h2>
             <p>
-                Instead of treating wallet, trading, and payments as separate products, Crypto Bot connects them into one streamlined experience.
+                The wallet is built for convenience and integration. Here is a closer look at the features that make it practical for everyday use.
             </p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Telegram-native experience</h3>
+                    <p>No browser extension, no separate app. Everything runs inside the Telegram interface you already use daily.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Multi-asset support</h3>
+                    <p>Hold TON and other supported crypto assets side by side. Check the bot for the current asset list.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Instant receive addresses</h3>
+                    <p>Generate a deposit address for any supported asset in seconds and share it however you like.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Send to Telegram users</h3>
+                    <p>Send crypto directly to other Telegram users who use Crypto Bot, without needing to copy long wallet addresses.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Connected to P2P and Exchange</h3>
+                    <p>Your wallet balance is the source for trades and payments. Switch between wallet, P2P, and exchange in one flow.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>No registration beyond Telegram</h3>
+                    <p>Your Telegram account acts as your identity. No email, password, or extra verification step is needed to get started.</p>
+                </div>
+            </div>
+        </article>
+
+        <article class="panel">
+            <h2>Telegram crypto wallet vs. standalone wallets</h2>
+            <p>
+                Many users wonder whether a Telegram-based wallet is a reasonable alternative to a standalone crypto wallet. Here is a straightforward comparison of use cases.
+            </p>
+            <div style="overflow-x:auto;">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>Factor</th>
+                            <th>Crypto Bot Telegram Wallet</th>
+                            <th>Standalone Wallet App</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Setup effort</td>
+                            <td>Zero — works inside Telegram</td>
+                            <td>Download, install, back up seed phrase</td>
+                        </tr>
+                        <tr>
+                            <td>Best for</td>
+                            <td>Active Telegram users, everyday crypto use</td>
+                            <td>Long-term cold storage, self-custody</td>
+                        </tr>
+                        <tr>
+                            <td>P2P and exchange access</td>
+                            <td>Built-in, seamless</td>
+                            <td>Requires separate platforms</td>
+                        </tr>
+                        <tr>
+                            <td>Send to contacts</td>
+                            <td>Directly to Telegram usernames</td>
+                            <td>Requires wallet address</td>
+                        </tr>
+                        <tr>
+                            <td>User identity</td>
+                            <td>Telegram account</td>
+                            <td>Seed phrase / private key</td>
+                        </tr>
+                        <tr>
+                            <td>App switching required</td>
+                            <td>No</td>
+                            <td>Yes, between wallet and exchange</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-top:14px;">
+                The Telegram crypto wallet is not intended to replace hardware wallets for large long-term holdings. It is designed for active users who want speed, simplicity, and integration with trading and payment workflows inside Telegram.
+            </p>
+        </article>
+
+        <article class="panel">
+            <h2>Who this wallet is for</h2>
+            <p>
+                The Crypto Bot wallet fits a wide range of users, from complete beginners to people who want a faster workflow alongside their existing crypto tools.
+            </p>
+            <ul>
+                <li><strong>Beginners:</strong> No technical setup required on day one. A great entry point to understanding crypto in a familiar Telegram environment.</li>
+                <li><strong>Telegram power users:</strong> If you already communicate via Telegram, having your wallet in the same app reduces friction significantly.</li>
+                <li><strong>Traders:</strong> Move between holding assets in your wallet, executing exchange orders, and doing P2P deals without leaving Telegram.</li>
+                <li><strong>Freelancers and creators:</strong> Receive crypto payments directly into your wallet and manage them alongside your Crypto Pay invoices.</li>
+                <li><strong>Businesses:</strong> Use the wallet as the receiving layer for crypto payments collected through Crypto Pay invoice flows.</li>
+                <li><strong>International users:</strong> Send and receive crypto across borders without relying on traditional banking infrastructure.</li>
+            </ul>
         </article>
 
         <article class="panel">
             <h2>How it fits with P2P and Exchange</h2>
             <p>
-                The wallet is not just for storage. It also supports broader crypto workflows.
-                Users can move between holding funds, buying or selling through P2P, and using exchange tools more easily.
+                The wallet is not just for storage. It supports broader crypto workflows inside the bot. Users can move between holding funds, buying or selling through P2P, and using exchange tools for active trading — all without leaving Telegram. This connected approach means you never need to manually copy addresses between different apps or services.
+            </p>
+            <p>
+                For example, if you buy USDT through the P2P market, the funds arrive directly in your wallet. From there you can hold them, swap them in the exchange, or use them to pay someone. The wallet bridges all the different actions you might take in a single crypto session.
             </p>
             <div class="wallet-links">
                 <a href="/p2p.html" class="btn btn-ghost">Explore P2P</a>
@@ -213,23 +331,52 @@
         </article>
 
         <article class="panel">
-            <h2>Who this wallet is for</h2>
-            <ul>
-                <li>Beginners who want a simple Telegram-first crypto workflow</li>
-                <li>Users who want to receive and send crypto without leaving Telegram</li>
-                <li>Traders moving between wallet, exchange, and P2P actions</li>
-                <li>Businesses and creators exploring crypto payments</li>
-            </ul>
+            <h2>Frequently Asked Questions</h2>
+
+            <details class="faq-item">
+                <summary>Do I need to download anything to use the wallet?</summary>
+                <p>No. The Crypto Bot wallet runs entirely inside Telegram. As long as you have Telegram installed, you have access. There is no separate wallet app to download or install.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Do I need a separate account or email to register?</summary>
+                <p>No. Your Telegram account is all you need. The bot does not require a separate email, password, or registration process to get started.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Which cryptocurrencies does the wallet support?</summary>
+                <p>The wallet supports TON and a range of other major crypto assets. Check the bot directly for the current list of supported assets, as coverage may be updated over time.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>How do I receive crypto into my Telegram wallet?</summary>
+                <p>Open the bot, go to Wallet, select the asset you want to receive, and tap Deposit. You will get a receive address and QR code you can share with the sender. Funds will appear in your balance after on-chain confirmation.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Can I send crypto to other Telegram users?</summary>
+                <p>Yes. If the recipient also uses Crypto Bot, you can send crypto directly to their Telegram username without needing to copy a long wallet address. This makes sending simple and fast.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Is my wallet balance connected to P2P and Exchange?</summary>
+                <p>Yes. Your wallet balance is used across wallet transfers, P2P trades, and exchange orders within Crypto Bot. Funds flow between these features without requiring manual transfers between separate accounts.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Is it safe to store crypto in the Telegram wallet?</summary>
+                <p>The wallet includes built-in security mechanisms, but user-level security practices matter. Enable Telegram two-factor authentication, never share your account credentials, and always access the bot through the official Crypto Bot link. See the <a href="/security.html">Security page</a> for more details.</p>
+            </details>
         </article>
 
         <article class="panel">
-            <h2>Learn more</h2>
+            <h2>Get started with your Telegram crypto wallet</h2>
             <p>
-                If you want to go deeper, visit the blog for tutorials and practical guides about TON, Telegram bots, payments, and crypto workflows.
+                Opening the Crypto Bot wallet takes less than a minute. There is no form to fill in, no verification step required to explore the basics, and no app to install beyond Telegram itself. Just open Telegram, start the bot, and you have a functioning <strong>telegram crypto wallet</strong> ready to use. Whether you want to store crypto, receive your first payment, or connect your wallet to trading and payment features, everything starts from the same simple interface.
             </p>
             <div class="wallet-links">
-                <a href="/blog" class="btn btn-primary">Read the Blog</a>
-                <a href="https://bit.ly/4jo0oou" class="btn btn-primary">Launch Crypto Bot</a>
+                <a href="https://bit.ly/4jo0oou" class="btn btn-primary">Launch Crypto Bot in Telegram</a>
+                <a href="/blog" class="btn btn-ghost">Read the Blog</a>
             </div>
         </article>
     </div>
@@ -237,7 +384,7 @@
 
 <footer>
     <div class="container footer-grid">
-        <p>© 2026 Crypto Bot Ltd.</p>
+        <p>&copy; 2026 Crypto Bot Ltd.</p>
         <div class="footer-links">
             <a href="/fees.html">Fees</a>
             <a href="/security.html">Security</a>
