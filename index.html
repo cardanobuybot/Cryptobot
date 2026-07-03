@@ -198,8 +198,6 @@
 <canvas id="bgCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;"></canvas>
 <script>
 window.addEventListener('load', function() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.innerWidth < 768) return;
   (function(){
   var c = document.getElementById('bgCanvas');
   var ctx = c.getContext('2d');
