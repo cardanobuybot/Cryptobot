@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Pay and Invoices — Crypto Bot</title>
+    <title>Accept Crypto Payments in Telegram — Crypto Bot</title>
     <meta name="description" content="Accept crypto payments and create invoices in Telegram with Crypto Bot. Designed for creators, merchants, and online businesses — zero setup needed.">
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://www.cryptobot.ltd/crypto-pay">
     <link rel="stylesheet" href="https://www.cryptobot.ltd/styles.css">
 
-    <meta property="og:title" content="Crypto Pay and Invoices — Crypto Bot">
+    <meta property="og:title" content="Accept Crypto Payments in Telegram — Crypto Bot">
     <meta property="og:description" content="Accept crypto payments and create invoices in Telegram with Crypto Bot. Designed for creators, merchants, and online businesses — zero setup needed.">
     <meta property="og:url" content="https://www.cryptobot.ltd/crypto-pay">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://www.cryptobot.ltd/Crypto_Bot.png">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Crypto Pay and Invoices — Crypto Bot">
+    <meta name="twitter:title" content="Accept Crypto Payments in Telegram — Crypto Bot">
     <meta name="twitter:description" content="Accept crypto payments and create invoices in Telegram with Crypto Bot. Designed for creators, merchants, and online businesses — zero setup needed.">
     <meta name="twitter:image" content="https://www.cryptobot.ltd/Crypto_Bot.png">
 
@@ -24,7 +24,7 @@
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "Crypto Pay and Invoices \u2014 Crypto Bot",
+  "name": "Accept Crypto Payments in Telegram — Crypto Bot",
   "url": "https://www.cryptobot.ltd/crypto-pay",
   "description": "Accept crypto payments and create invoices in Telegram with Crypto Bot.",
   "inLanguage": "en"
@@ -41,15 +41,23 @@
       "name": "What is Crypto Pay used for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Crypto Pay is used to create invoices, accept crypto payments, and manage payment flows inside Telegram."
+        "text": "Crypto Pay is used to create invoices, generate payment links, and accept crypto payments from customers and clients — all managed inside Telegram through Crypto Bot."
       }
     },
     {
       "@type": "Question",
-      "name": "Who can use Crypto Pay?",
+      "name": "Who can use Crypto Pay to accept payments?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Crypto Pay is useful for creators, freelancers, merchants, digital sellers, and online businesses that want to accept crypto payments."
+        "text": "Crypto Pay is useful for creators, freelancers, merchants, digital sellers, community owners, and online businesses that want to accept crypto payments without setting up a separate payment processor."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need technical skills to accept crypto payments with Crypto Bot?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Basic invoice and payment link creation requires no technical skills. You can create and share invoices directly inside Telegram. For developers, more advanced integration options are also available."
       }
     },
     {
@@ -57,71 +65,38 @@
       "name": "Can I use Crypto Pay for recurring or automated payments?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Crypto Pay can support invoice flows, payment links, and automation scenarios depending on your setup and business model."
+        "text": "Yes. Crypto Pay can support invoice flows, payment links, and automation scenarios depending on your setup and business model. Developers can build more automated flows using the bot API."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do payments received through Crypto Pay go?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Payments received through Crypto Pay flow into your Crypto Bot wallet. From there you can hold them, exchange them for other assets, or withdraw them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What crypto assets can customers pay with?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Supported payment assets depend on the current configuration of Crypto Pay. Open the bot to see what assets are available for payment invoices at this time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Crypto Pay suitable for Telegram channel or community monetization?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Telegram channel owners, community managers, and content creators can use Crypto Pay to collect payments for exclusive access, subscriptions, digital products, and services — all inside Telegram."
       }
     }
   ]
 }
 </script>
 
-    <style>
-        .content-page {
-            padding: 56px 0 80px;
-        }
-
-        .page-wrap {
-            width: min(980px, 92%);
-            margin: 0 auto;
-        }
-
-        .panel {
-            border: 1px solid rgba(145, 168, 222, 0.2);
-            background: rgba(22, 32, 57, 0.72);
-            border-radius: 18px;
-            padding: 28px;
-            box-shadow: 0 18px 45px rgba(0, 8, 30, 0.45);
-        }
-
-        .panel + .panel {
-            margin-top: 20px;
-        }
-
-        .panel h2 {
-            margin-bottom: 12px;
-        }
-
-        .panel p,
-        .panel li {
-            color: #dbe7fb;
-            line-height: 1.75;
-        }
-
-        .panel ul {
-            margin: 0 0 16px 20px;
-        }
-
-        .breadcrumbs {
-            color: #9fb2d8;
-            margin-bottom: 14px;
-        }
-
-        .breadcrumbs a {
-            color: #9fb2d8;
-            text-decoration: none;
-        }
-
-        .breadcrumbs a:hover {
-            text-decoration: underline;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 12px;
-            margin-top: 16px;
-            flex-wrap: wrap;
-        }
-    </style>
-<script type="application/ld+json">
+    <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -141,6 +116,34 @@
   ]
 }
 </script>
+
+    <style>
+        .content-page { padding: 56px 0 80px; }
+        .page-wrap { width: min(980px, 92%); margin: 0 auto; }
+        .panel { border: 1px solid rgba(145, 168, 222, 0.2); background: rgba(22, 32, 57, 0.72); border-radius: 18px; padding: 28px; box-shadow: 0 18px 45px rgba(0, 8, 30, 0.45); }
+        .panel + .panel { margin-top: 20px; }
+        .panel h2 { margin-bottom: 12px; }
+        .panel p, .panel li { color: #dbe7fb; line-height: 1.75; }
+        .panel ul, .panel ol { margin: 0 0 16px 20px; }
+        .breadcrumbs { color: #9fb2d8; margin-bottom: 14px; }
+        .breadcrumbs a { color: #9fb2d8; text-decoration: none; }
+        .breadcrumbs a:hover { text-decoration: underline; }
+        .cta-buttons { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+        .faq-item { border-bottom: 1px solid rgba(145,168,222,0.15); padding: 14px 0; }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-item summary { font-weight: 600; cursor: pointer; color: #eaf4ff; list-style: none; padding-right: 20px; position: relative; }
+        .faq-item summary::after { content: "+"; position: absolute; right: 0; top: 0; color: #9fb2d8; }
+        .faq-item[open] summary::after { content: "2"; }
+        .faq-item p { margin-top: 10px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 16px; }
+        .feature-card { background: rgba(145,168,222,0.07); border: 1px solid rgba(145,168,222,0.15); border-radius: 12px; padding: 18px; }
+        .feature-card h3 { margin: 0 0 8px; font-size: 1rem; color: #eaf4ff; }
+        .feature-card p { margin: 0; font-size: 0.92rem; }
+        .use-case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 16px; }
+        .use-case-card { background: rgba(145,168,222,0.05); border-left: 3px solid rgba(145,168,222,0.4); padding: 16px 20px; border-radius: 0 10px 10px 0; }
+        .use-case-card h3 { margin: 0 0 8px; font-size: 0.95rem; color: #eaf4ff; }
+        .use-case-card p { margin: 0; font-size: 0.9rem; color: #c0d4f5; }
+    </style>
 </head>
 <body>
 <header class="site-header">
@@ -149,7 +152,7 @@
             <img src="https://www.cryptobot.ltd/cryptobot.jpg" alt="Crypto Bot Logo">
             <span>Crypto Bot</span>
         </a>
-                <div class="nav-dots-wrap">
+        <div class="nav-dots-wrap">
             <button class="nav-dots-btn" id="navDotsBtn" aria-label="Menu" aria-expanded="false">&#8943;</button>
             <nav class="nav-dropdown" id="navDropdown" aria-label="Main">
                 <a href="/#features" onclick="closeNav()">Features</a>
@@ -171,17 +174,76 @@
         </div>
 
         <article class="panel">
+            <p>
+                Crypto Pay makes it straightforward to <strong>accept crypto payments in Telegram</strong> without setting up a separate payment processor, gateway, or merchant account. Whether you are a freelancer sending a one-time invoice, a creator charging for exclusive content, or a business automating a payment flow, Crypto Pay gives you a practical starting point that lives entirely inside Telegram.
+            </p>
+        </article>
+
+        <article class="panel">
             <h2>What Crypto Pay helps you do</h2>
             <p>
                 Crypto Pay is designed for businesses and individuals who want to receive payments through a Telegram-native crypto workflow.
-                Instead of relying only on traditional payment tools, you can generate invoices, share payment links, and simplify crypto-based payment collection.
+                Instead of relying only on traditional payment tools, you can generate invoices, share payment links, and simplify crypto-based payment collection — all from inside the bot you already use.
+            </p>
+            <p>
+                The key advantage of using Telegram for crypto payments is that your audience is already there. If you run a Telegram channel, group, or community, your customers and followers can pay without ever leaving the app. This reduces the friction that typically comes with sending people to an external checkout page or payment portal.
             </p>
             <ul>
                 <li>Create single-payment invoices for services or products</li>
                 <li>Use payment links for digital offers and online sales</li>
                 <li>Support subscription or recurring payment workflows</li>
                 <li>Keep payment activity close to your Telegram operations</li>
+                <li>Receive payments directly into your Crypto Bot wallet</li>
+                <li>No separate merchant account or payment processor required</li>
             </ul>
+        </article>
+
+        <article class="panel">
+            <h2>How to accept crypto payments — step by step</h2>
+            <p>
+                Setting up your first crypto payment invoice through Crypto Bot is quick. No technical configuration is required for basic invoice creation.
+            </p>
+            <ol>
+                <li><strong>Open Crypto Bot in Telegram</strong> — Start the bot and navigate to the Crypto Pay section.</li>
+                <li><strong>Create an invoice</strong> — Select the asset, enter the amount, and add an optional description for the payment. This creates a shareable invoice link.</li>
+                <li><strong>Share the invoice link</strong> — Send the invoice link to your customer, client, or community members. They click the link and are taken directly to the payment interface inside Telegram.</li>
+                <li><strong>Customer completes payment</strong> — The customer opens the invoice, confirms the amount and asset, and approves the payment from their own Crypto Bot wallet or compatible wallet.</li>
+                <li><strong>Funds arrive in your wallet</strong> — Once the payment is confirmed, the funds arrive in your Crypto Bot wallet. You receive a notification inside Telegram.</li>
+                <li><strong>Manage and move funds</strong> — From your wallet, you can hold the received crypto, swap it to another asset via the exchange, or use it in other Crypto Bot flows.</li>
+            </ol>
+        </article>
+
+        <article class="panel">
+            <h2>Key features of Telegram crypto payments</h2>
+            <p>
+                Crypto Pay is built to be practical and flexible for a range of payment scenarios. Here is what makes it useful.
+            </p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>No payment processor setup</h3>
+                    <p>Skip the merchant account, gateway configuration, and bank approval process. Crypto Pay works through the bot immediately.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Invoice creation</h3>
+                    <p>Generate a payment invoice for any amount in supported crypto assets. Share the link with anyone via Telegram or external channels.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Payment links</h3>
+                    <p>Create reusable or single-use payment links for digital products, services, and subscriptions. Customers pay directly through Telegram.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Telegram-native checkout</h3>
+                    <p>Customers pay inside Telegram without being redirected to an external site. This reduces drop-off and improves the payment experience.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Wallet integration</h3>
+                    <p>Received payments go straight into your Crypto Bot wallet. Move funds into exchange or P2P flows from the same bot.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Developer-friendly</h3>
+                    <p>For businesses that need automated flows, the Crypto Bot API supports more advanced invoice generation and payment management scenarios.</p>
+                </div>
+            </div>
         </article>
 
         <article class="panel">
@@ -189,27 +251,65 @@
             <p>
                 Crypto Pay is useful for creators, freelancers, merchants, agencies, community owners, and online businesses that want to accept cryptocurrency in a more direct way.
             </p>
-            <ul>
-                <li>Creators selling content or digital access</li>
-                <li>Freelancers invoicing for services</li>
-                <li>Merchants accepting crypto payments online</li>
-                <li>Businesses automating payment flows inside Telegram</li>
-            </ul>
+            <div class="use-case-grid">
+                <div class="use-case-card">
+                    <h3>Content creators</h3>
+                    <p>Charge for exclusive Telegram channel access, premium content, or digital downloads using invoice links shared with your audience.</p>
+                </div>
+                <div class="use-case-card">
+                    <h3>Freelancers</h3>
+                    <p>Send crypto invoices to clients for completed work. No need for a PayPal account or bank wire — just a shareable payment link.</p>
+                </div>
+                <div class="use-case-card">
+                    <h3>Online merchants</h3>
+                    <p>Add a crypto payment option to your existing Telegram-based sales flow. Customers pay with crypto instead of or alongside traditional methods.</p>
+                </div>
+                <div class="use-case-card">
+                    <h3>Community owners</h3>
+                    <p>Monetize your Telegram group or channel by collecting membership fees, event payments, or donations in crypto.</p>
+                </div>
+                <div class="use-case-card">
+                    <h3>Digital product sellers</h3>
+                    <p>Sell software, templates, courses, or any digital product and collect crypto payment automatically before delivering access.</p>
+                </div>
+                <div class="use-case-card">
+                    <h3>Agencies and service businesses</h3>
+                    <p>Automate recurring billing or project-based invoicing for clients in regions where crypto is the preferred payment method.</p>
+                </div>
+            </div>
         </article>
 
         <article class="panel">
-            <h2>Why invoices and payment links matter</h2>
+            <h2>Why invoices and payment links matter for crypto acceptance</h2>
             <p>
-                Invoices and payment links make it easier to standardize how customers pay.
-                Instead of manually sharing wallet details every time, you can guide users through a cleaner payment flow and reduce friction.
+                One of the biggest friction points in accepting crypto is the manual process of sharing wallet addresses. When a customer wants to pay you in crypto, asking them to copy a long hex address, choose the correct network, and send the exact amount introduces multiple opportunities for error. A single mistake — wrong network, wrong address, wrong amount — can result in lost funds.
             </p>
+            <p>
+                Invoices and payment links solve this by encoding all the payment details into a single shareable link. The customer clicks the link, sees the pre-filled amount and asset, and approves the payment in one step. There is no address to copy, no amount to calculate, and no network to select manually. The structured flow reduces errors and creates a better experience for both sender and receiver.
+            </p>
+            <p>
+                For businesses collecting many payments, this also means less time spent manually reconciling who paid what. Each invoice can include a reference or description, making it easier to match payments to specific orders or clients.
+            </p>
+        </article>
+
+        <article class="panel">
+            <h2>Common use cases for Telegram crypto payments</h2>
+            <ul>
+                <li><strong>Single invoice for freelance services</strong> — Send a client an invoice for a web design project, consulting session, or written deliverable and receive payment in crypto directly to your wallet</li>
+                <li><strong>Payment links for digital products</strong> — Sell an ebook, course, or plugin with a payment link that customers use to pay before receiving the download link</li>
+                <li><strong>Subscription billing workflows</strong> — Collect recurring crypto payments for premium Telegram channel membership or ongoing service retainers</li>
+                <li><strong>Simple crypto checkout for Telegram communities</strong> — Let group members pay for event tickets, exclusive roles, or premium tiers using a payment link posted in the group</li>
+                <li><strong>Cross-border service payments</strong> — Accept payments from international clients without worrying about bank wire fees, currency conversion delays, or payment processor restrictions</li>
+                <li><strong>Donations and tips</strong> — Share a payment link for voluntary contributions from your Telegram audience</li>
+            </ul>
         </article>
 
         <article class="panel">
             <h2>How Crypto Pay fits with wallet and exchange</h2>
             <p>
                 Crypto Pay works best when connected to a broader crypto workflow.
-                You can receive funds, hold them in a wallet, and move into exchange or P2P flows depending on how you want to manage liquidity and operations.
+                You can receive funds via Crypto Pay invoices, hold them in a wallet, and move into exchange or P2P flows depending on how you want to manage liquidity and operations.
+                If you receive TON as payment and want USDT, the exchange is one step away inside the same bot.
             </p>
 
             <div class="cta-buttons">
@@ -220,26 +320,54 @@
         </article>
 
         <article class="panel">
-            <h2>Common use cases</h2>
-            <ul>
-                <li>Single invoice for freelance services</li>
-                <li>Payment links for digital products</li>
-                <li>Subscription billing workflows</li>
-                <li>Simple crypto checkout for Telegram-based communities</li>
-                <li>Payment collection for online businesses and service providers</li>
-            </ul>
+            <h2>Frequently Asked Questions</h2>
+
+            <details class="faq-item">
+                <summary>What is Crypto Pay and what is it used for?</summary>
+                <p>Crypto Pay is the payment feature inside Crypto Bot that lets you create invoices and payment links to accept crypto from customers and clients, all managed inside Telegram.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Do I need technical skills to accept crypto payments with Crypto Bot?</summary>
+                <p>No. Basic invoice and payment link creation requires no technical skills. You create and share invoices directly inside Telegram. For developers, the Crypto Bot API allows more advanced automated payment flows.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Where do payments received through Crypto Pay go?</summary>
+                <p>Payments received through Crypto Pay flow into your Crypto Bot wallet. From there you can hold them, exchange them for other assets, or withdraw them.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Can I use Crypto Pay for recurring or subscription payments?</summary>
+                <p>Yes. Crypto Pay supports invoice flows and payment links that can be used for recurring billing scenarios. More advanced automation is possible for developers using the bot API.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>What crypto assets can customers pay with?</summary>
+                <p>Supported payment assets depend on the current Crypto Pay configuration. Open the bot to see what assets are available for payment invoices at this time.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Is Crypto Pay suitable for Telegram channel monetization?</summary>
+                <p>Yes. Telegram channel owners and community managers use Crypto Pay to collect payments for exclusive access, premium content, subscriptions, and digital products — all without leaving Telegram.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Can I accept payments from customers who do not use Crypto Bot?</summary>
+                <p>Payment processing through Crypto Pay is designed to work within the Telegram and Crypto Bot ecosystem. Check the current bot documentation for the latest details on supported payment methods and customer requirements.</p>
+            </details>
         </article>
 
         <article class="panel">
-            <h2>Learn more</h2>
+            <h2>Get started accepting crypto payments in Telegram</h2>
             <p>
-                Visit the blog for guides about accepting payments in TON, using Telegram bots for payment flows, and building crypto payment workflows.
+                The simplest way to start is to open Crypto Bot in Telegram and create your first invoice. You will have a shareable payment link ready in under a minute. Whether you are testing the flow for a single payment or planning a broader crypto payment setup for your business, Crypto Pay gives you a practical foundation for <strong>accepting crypto payments in Telegram</strong> without any of the complexity of a traditional payment gateway.
             </p>
 
             <div class="cta-buttons">
-                <a href="/blog" class="btn btn-primary">Read the Blog</a>
-                <a href="/blog/how-to-accept-payments-in-ton-using-a-telegram-bot-2" class="btn btn-primary">Read Payments Guide</a>
                 <a href="https://bit.ly/4jo0oou" class="btn btn-primary">Launch Crypto Bot</a>
+                <a href="/blog/how-to-accept-payments-in-ton-using-a-telegram-bot-2" class="btn btn-ghost">Read Payments Guide</a>
+                <a href="/blog" class="btn btn-ghost">Read the Blog</a>
             </div>
         </article>
     </div>
@@ -247,7 +375,7 @@
 
 <footer>
     <div class="container footer-grid">
-        <p>© 2026 Crypto Bot Ltd.</p>
+        <p>&copy; 2026 Crypto Bot Ltd.</p>
         <div class="footer-links">
             <a href="/legal.html">Legal</a>
             <a href="/privacy.html">Privacy</a>
