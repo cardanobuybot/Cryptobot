@@ -1,0 +1,18 @@
+# Crypto Bot
+
+> Crypto Bot is a Telegram-native cryptocurrency platform that lets users buy, sell, store, send, and receive crypto directly inside Telegram — no separate app needed. It offers a P2P marketplace, instant exchange, crypto payments (Crypto Pay), and a multi-currency wallet supporting TON, BTC, ETH, USDT and more.
+
+## Pages
+
+- [Home](https://www.cryptobot.ltd/): Overview of all Crypto Bot features — wallet, P2P, exchange, and payments in one Telegram experience.
+- [Wallet](https://www.cryptobot.ltd/wallet): Telegram crypto wallet — store, send and receive TON, BTC, ETH, USDT and other assets without leaving Telegram.
+- [P2P Market](https://www.cryptobot.ltd/p2p): Peer-to-peer crypto marketplace inside Telegram — buy and sell crypto directly with other users.
+- [Exchange](https://www.cryptobot.ltd/exchange): Instant crypto exchange inside Telegram — swap between TON, BTC, ETH, USDT and more at live rates.
+- [Crypto Pay](https://www.cryptobot.ltd/crypto-pay): Accept crypto payments in Telegram bots and apps using the Crypto Pay API — TON, BTC, ETH, USDT supported.
+- [Fees](https://www.cryptobot.ltd/fees): Full breakdown of Crypto Bot trading, exchange, and withdrawal fees.
+- [Security](https://www.cryptobot.ltd/security): How Crypto Bot keeps your funds and data safe — encryption, 2FA, and audit information.
+- [About](https://www.cryptobot.ltd/about): About Crypto Bot — the team, mission, and history of the platform.
+- [Buy TON in Telegram](https://www.cryptobot.ltd/buy-ton): Step-by-step guide to buying Toncoin (TON) directly inside Telegram using Crypto Bot.
+- [Buy Bitcoin in Telegram](https://www.cryptobot.ltd/buy-bitcoin-telegram): How to buy Bitcoin (BTC) via Telegram bot — fast, simple, no exchange account needed.
+- [How to Use Crypto Bot](https://www.cryptobot.ltd/how-to-use): Complete beginner's guide to getting started with Crypto Bot in Telegram.
+- [Contact](https://www.cryptobot.ltd/contact): Contact the Crypto Bot support team.
