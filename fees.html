@@ -48,10 +48,10 @@
   "mainEntity":[
     {
       "@type":"Question",
-      "name":"Do Crypto Bot fees stay fixed?",
+      "name":"Are Crypto Bot fees fixed or variable?",
       "acceptedAnswer":{
         "@type":"Answer",
-        "text":"Not always. Some fees depend on network conditions, market activity, or the type of product flow being used."
+        "text":"Fees in Crypto Bot vary depending on the feature being used. Wallet transfers are subject to network fees which change with blockchain conditions. P2P trades depend on the specific offer terms. Exchange orders follow a trading fee schedule. Always check the final quote in the bot before confirming."
       }
     },
     {
@@ -59,15 +59,47 @@
       "name":"Do wallet, P2P, exchange, and Crypto Pay use the same fee model?",
       "acceptedAnswer":{
         "@type":"Answer",
-        "text":"No. Wallet transfers, P2P trades, exchange orders, and invoice flows can use different fee structures depending on how the transaction is processed."
+        "text":"No. Each feature uses a different fee model. Wallet transfers involve network fees, P2P trades involve offer-specific pricing, exchange orders follow a trading fee schedule, and Crypto Pay fees depend on the payment flow setup."
       }
     },
     {
       "@type":"Question",
-      "name":"Should users check the final quote before confirming?",
+      "name":"What is a network fee in crypto?",
       "acceptedAnswer":{
         "@type":"Answer",
-        "text":"Yes. Users should always review the final quote, payment amount, and fee details before confirming any transaction."
+        "text":"A network fee (also called a gas fee or transaction fee) is a cost paid to the blockchain network to process and confirm a transaction. The fee amount varies based on current network traffic and congestion."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"How can I see the fee before confirming a transaction?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Crypto Bot shows you the estimated fee and final amount in the confirmation step before you approve any transaction. Review this carefully before confirming to avoid surprises."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Are there hidden fees in Crypto Bot?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Crypto Bot aims for transparent pricing. All applicable fees are shown in the confirmation step. Users should review the full quoted cost before confirming any transaction."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Do P2P offer prices include fees?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"P2P offer prices are set by individual sellers and buyers. The displayed offer price reflects their terms. Check the complete trade summary inside the bot before confirming a P2P deal."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Should I always check the final quote before confirming?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Yes. Always review the final quote, total payment amount, and visible fee details before confirming any transaction in Crypto Bot. This is especially important for P2P trades, exchange orders, and invoice-based payment flows."
       }
     }
   ]
@@ -75,82 +107,29 @@
 </script>
 
     <style>
-        .content-page {
-            padding: 56px 0 80px;
-        }
-
-        .page-wrap {
-            width: min(980px, 92%);
-            margin: 0 auto;
-        }
-
-        .panel {
-            border: 1px solid rgba(145, 168, 222, 0.2);
-            background: rgba(22, 32, 57, 0.72);
-            border-radius: 18px;
-            padding: 28px;
-            box-shadow: 0 18px 45px rgba(0, 8, 30, 0.45);
-        }
-
-        .panel + .panel {
-            margin-top: 20px;
-        }
-
-        .panel h2 {
-            margin-bottom: 12px;
-        }
-
-        .panel p,
-        .panel li,
-        .panel td,
-        .panel th {
-            color: #dbe7fb;
-            line-height: 1.75;
-        }
-
-        .breadcrumbs {
-            color: #9fb2d8;
-            margin-bottom: 14px;
-        }
-
-        .breadcrumbs a {
-            color: #9fb2d8;
-            text-decoration: none;
-        }
-
-        .breadcrumbs a:hover {
-            text-decoration: underline;
-        }
-
-        .table-wrap {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        th,
-        td {
-            border-bottom: 1px solid rgba(145, 168, 222, 0.18);
-            padding: 14px 12px;
-            text-align: left;
-            vertical-align: top;
-        }
-
-        th {
-            color: #eaf4ff;
-            font-weight: 700;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 12px;
-            margin-top: 16px;
-            flex-wrap: wrap;
-        }
+        .content-page { padding: 56px 0 80px; }
+        .page-wrap { width: min(980px, 92%); margin: 0 auto; }
+        .panel { border: 1px solid rgba(145, 168, 222, 0.2); background: rgba(22, 32, 57, 0.72); border-radius: 18px; padding: 28px; box-shadow: 0 18px 45px rgba(0, 8, 30, 0.45); }
+        .panel + .panel { margin-top: 20px; }
+        .panel h2 { margin-bottom: 12px; }
+        .panel p, .panel li, .panel td, .panel th { color: #dbe7fb; line-height: 1.75; }
+        .panel ul, .panel ol { margin: 0 0 16px 20px; }
+        .breadcrumbs { color: #9fb2d8; margin-bottom: 14px; }
+        .breadcrumbs a { color: #9fb2d8; text-decoration: none; }
+        .breadcrumbs a:hover { text-decoration: underline; }
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border-bottom: 1px solid rgba(145, 168, 222, 0.18); padding: 14px 12px; text-align: left; vertical-align: top; }
+        th { color: #eaf4ff; font-weight: 700; }
+        .cta-buttons { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+        .faq-item { border-bottom: 1px solid rgba(145,168,222,0.15); padding: 14px 0; }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-item summary { font-weight: 600; cursor: pointer; color: #eaf4ff; list-style: none; padding-right: 20px; position: relative; }
+        .faq-item summary::after { content: "+"; position: absolute; right: 0; top: 0; color: #9fb2d8; }
+        .faq-item[open] summary::after { content: "2"; }
+        .faq-item p { margin-top: 10px; }
+        .tip-box { background: rgba(80,120,200,0.10); border: 1px solid rgba(145,168,222,0.25); border-radius: 10px; padding: 16px 20px; margin-top: 16px; }
+        .tip-box p { margin: 0; color: #c8ddf8; }
     </style>
 </head>
 <body>
@@ -160,7 +139,7 @@
             <img src="https://www.cryptobot.ltd/cryptobot.jpg" alt="Crypto Bot Logo">
             <span>Crypto Bot</span>
         </a>
-                <div class="nav-dots-wrap">
+        <div class="nav-dots-wrap">
             <button class="nav-dots-btn" id="navDotsBtn" aria-label="Menu" aria-expanded="false">&#8943;</button>
             <nav class="nav-dropdown" id="navDropdown" aria-label="Main">
                 <a href="/#features" onclick="closeNav()">Features</a>
@@ -182,78 +161,164 @@
         </div>
 
         <article class="panel">
+            <p>
+                Understanding <strong>crypto bot fees</strong> before you trade is one of the most practical steps you can take. Every feature in Crypto Bot — wallet transfers, P2P trading, exchange orders, and Crypto Pay invoices — has its own fee structure. This page explains the general logic behind each, so you know what to look for and what questions to ask before confirming a transaction.
+            </p>
+        </article>
+
+        <article class="panel">
             <h2>Why fee transparency matters</h2>
             <p>
                 Fees are one of the most important parts of any crypto workflow. Whether you are sending funds,
                 buying through P2P, placing exchange orders, or collecting payments through invoices, the final
-                cost can depend on several factors.
+                cost can depend on several factors that are not always visible at a glance.
+            </p>
+            <p>
+                Transparent fee information helps users make better decisions. When you understand how different fee models work, you can choose the right feature for your situation, time your transactions when network costs are lower, and avoid unexpected deductions from your final amount.
             </p>
             <p>
                 This page gives a high-level overview of common fee models so users can better understand how
-                pricing works before confirming transactions.
+                pricing works before confirming transactions. Always check the final quote shown inside the bot for the specific amount that applies to your transaction at that moment.
             </p>
         </article>
 
         <article class="panel table-wrap">
-            <h2>Fee overview</h2>
+            <h2>Fee overview by feature</h2>
             <table>
                 <thead>
                     <tr>
                         <th>Feature</th>
                         <th>Fee model</th>
-                        <th>Note</th>
+                        <th>What to check</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Wallet transfer</td>
-                        <td>Network-dependent</td>
-                        <td>Fees can vary depending on blockchain conditions and transaction load.</td>
+                        <td>Network-dependent (blockchain fee)</td>
+                        <td>Check the current network fee shown before confirming. Fees vary with blockchain congestion.</td>
                     </tr>
                     <tr>
                         <td>P2P trade</td>
-                        <td>Platform + partner dependent</td>
-                        <td>Check the final quote, price, and payment terms before confirming.</td>
+                        <td>Offer price + any platform component</td>
+                        <td>Review the full trade summary including price, payment terms, and any applicable charges before confirming.</td>
                     </tr>
                     <tr>
                         <td>Exchange order</td>
                         <td>Trading fee schedule</td>
-                        <td>Market and limit orders may differ depending on the product flow.</td>
+                        <td>Market and limit orders may differ. Check the quoted output and fee shown in the confirmation step.</td>
                     </tr>
                     <tr>
-                        <td>Invoices / Crypto Pay</td>
-                        <td>Merchant or usage based</td>
-                        <td>Can depend on business model, payment flow, and operating conditions.</td>
+                        <td>Crypto Pay invoices</td>
+                        <td>Usage or merchant-based</td>
+                        <td>Depends on business model and payment flow setup. Check the bot documentation for current invoice fee details.</td>
                     </tr>
                 </tbody>
             </table>
         </article>
 
         <article class="panel">
-            <h2>What affects the final fee</h2>
+            <h2>Wallet transfer fees explained</h2>
+            <p>
+                When you send crypto from your Crypto Bot wallet to an external address, a network fee is charged by the blockchain itself — not by the bot. This fee compensates the validators or miners who process and confirm the transaction on-chain.
+            </p>
+            <p>
+                Network fees are not fixed. They fluctuate based on how busy the blockchain is at any given time. When there is high demand for block space, fees tend to rise. During quieter periods, fees are typically lower. The TON blockchain is generally known for low transaction costs compared to networks like Ethereum, but the exact fee still varies.
+            </p>
+            <p>
+                The bot will show you the current estimated network fee before you confirm a wallet transfer. Always review this amount before approving, especially if you are sending a small amount where the fee could represent a significant percentage of the total.
+            </p>
             <ul>
-                <li>Blockchain network conditions</li>
-                <li>Order type and execution method</li>
-                <li>Payment method in P2P flow</li>
-                <li>Business or merchant payment setup</li>
-                <li>Market liquidity and quote conditions</li>
+                <li>Network fees go to blockchain validators, not to Crypto Bot</li>
+                <li>Fee amounts change with network congestion</li>
+                <li>Review the fee in the confirmation step before approving</li>
+                <li>Sending larger amounts at one time can be more fee-efficient than multiple small transfers</li>
             </ul>
         </article>
 
         <article class="panel">
-            <h2>Best practice before confirming</h2>
+            <h2>P2P trading fees explained</h2>
             <p>
-                Users should always check the final quote, total payment amount, and visible fee details before
-                confirming any action. This is especially important for P2P trades, exchange orders, and invoice-based
-                payment flows.
+                P2P trading works differently from standard exchange orders. In a P2P market, individual sellers and buyers post their own offers at prices they choose. The price you see on a P2P offer already reflects what that particular user is willing to accept or pay.
             </p>
+            <p>
+                This means P2P pricing is market-driven rather than platform-fixed. Two different sell offers for the same asset may have different prices, payment method requirements, and minimum or maximum trade limits. Comparing offers before selecting one is an important part of getting a fair deal on the <strong>crypto bot p2p market</strong>.
+            </p>
+            <p>
+                Beyond the offer price itself, there may be platform-level components involved in processing a P2P trade. Always read the full trade summary shown in the bot before confirming — this includes the offer price, the amount you will receive or send, and any additional costs that apply to that specific transaction.
+            </p>
+            <div class="tip-box">
+                <p><strong>Tip:</strong> Compare multiple P2P offers before committing. Better prices and payment terms are often available if you browse the full list rather than accepting the first offer you see.</p>
+            </div>
+        </article>
+
+        <article class="panel">
+            <h2>Exchange order fees explained</h2>
+            <p>
+                Exchange orders in Crypto Bot are subject to trading fees, which are applied when your order executes. The exact fee schedule for <strong>telegram crypto trading fees</strong> is best confirmed directly inside the bot, as rates can be updated over time.
+            </p>
+            <p>
+                A few general principles apply to exchange fee structures in crypto trading:
+            </p>
+            <ul>
+                <li><strong>Market orders vs. limit orders:</strong> Some platforms charge different fees depending on whether you place a market order (taker) or a limit order (maker). The Crypto Bot exchange may follow a similar model — check the bot for current rates.</li>
+                <li><strong>Fee shown before confirmation:</strong> The bot displays the expected output and fee in the confirmation step. This is your clearest view of the actual cost before you commit.</li>
+                <li><strong>Larger trades:</strong> For larger order sizes, the absolute fee amount will be proportionally larger even if the percentage rate stays the same. Always calculate your effective cost before trading significant amounts.</li>
+            </ul>
+        </article>
+
+        <article class="panel">
+            <h2>Crypto Pay and invoice fees</h2>
+            <p>
+                Crypto Pay fees depend on the payment flow setup and the type of usage involved. Individual invoice creation for basic use may have different terms than high-volume automated payment processing for businesses.
+            </p>
+            <p>
+                For developers using the Crypto Bot API to automate payment flows, fee details are available in the official documentation. For standard invoice and payment link creation inside the bot, check the current payment summary before finalizing an invoice.
+            </p>
+            <p>
+                It is also worth noting that when a customer pays an invoice, the blockchain network fee for processing that transaction is part of the total cost. This is separate from any platform-level fee that may apply to invoice creation or payment management.
+            </p>
+        </article>
+
+        <article class="panel">
+            <h2>What affects the final fee you pay</h2>
+            <p>
+                Understanding the variables that influence your fee helps you anticipate costs and plan accordingly.
+            </p>
+            <ul>
+                <li><strong>Blockchain network conditions:</strong> Higher traffic means higher on-chain fees for wallet transfers and on-chain payments</li>
+                <li><strong>Order type:</strong> Market vs. limit orders may carry different trading fee rates in the exchange</li>
+                <li><strong>P2P offer terms:</strong> The price set by the counterparty in a P2P deal directly affects the effective cost of the trade</li>
+                <li><strong>Payment method in P2P:</strong> Some payment methods may be associated with different offer prices in the marketplace</li>
+                <li><strong>Trade size:</strong> Even with a fixed percentage fee, the absolute amount increases with trade size</li>
+                <li><strong>Market liquidity:</strong> In exchange trading, low liquidity in a trading pair can mean worse execution prices, effectively increasing cost</li>
+                <li><strong>Business setup for Crypto Pay:</strong> Higher-volume invoice flows may have different fee structures than basic single-invoice use</li>
+            </ul>
+        </article>
+
+        <article class="panel">
+            <h2>Best practices for managing fees</h2>
+            <p>
+                A few simple habits help you minimize unexpected fee costs across all Crypto Bot features.
+            </p>
+            <ol>
+                <li><strong>Always read the confirmation screen.</strong> The bot shows you the fee and final amount before you approve. Never confirm without reading this.</li>
+                <li><strong>Compare P2P offers.</strong> Different offers for the same asset can have meaningfully different effective prices. A minute spent comparing can save you real money.</li>
+                <li><strong>Batch small transfers.</strong> If you regularly send small amounts to the same address, consider batching them into larger transfers to reduce the number of on-chain fee events.</li>
+                <li><strong>Choose your order type intentionally.</strong> If you are not in a hurry, a limit order might execute at a better price than a market order would give you instantly.</li>
+                <li><strong>Monitor network conditions.</strong> For non-urgent wallet transfers, sending during lower-activity periods can reduce network fees on busy blockchains.</li>
+                <li><strong>Understand P2P offer pricing.</strong> The displayed offer price already incorporates the seller or buyer's terms. If it does not work for you, look for a better offer rather than trying to negotiate after initiating a trade.</li>
+            </ol>
         </article>
 
         <article class="panel">
             <h2>How fees connect with other product flows</h2>
             <p>
                 Fees should be evaluated in context. Wallet transfers, P2P trades, exchange execution, and Crypto Pay
-                all solve different problems, so their pricing models are not always the same.
+                all solve different problems, so their pricing models are not always the same. What looks like a higher fee in one context may still be the right choice compared to using a different tool that has its own costs and limitations.
+            </p>
+            <p>
+                For example, a P2P trade might have a slightly different effective rate than an exchange order, but if P2P gives you access to a local payment method that is not otherwise available, the convenience may justify the difference. Evaluating total cost in context — not just the percentage fee — leads to better decisions.
             </p>
 
             <div class="cta-buttons">
@@ -265,15 +330,53 @@
         </article>
 
         <article class="panel">
-            <h2>Learn more</h2>
+            <h2>Frequently Asked Questions</h2>
+
+            <details class="faq-item">
+                <summary>Are Crypto Bot fees fixed or variable?</summary>
+                <p>Fees vary by feature. Wallet transfers use network fees that change with blockchain conditions. P2P trades depend on individual offer terms. Exchange orders follow a trading fee schedule. Always check the final quote in the bot before confirming.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>What is a network fee and why does it vary?</summary>
+                <p>A network fee is paid to the blockchain to process and confirm a transaction. The amount varies based on current network traffic. When demand for block space is high, fees rise. During quieter periods, fees are lower. TON typically has low network fees, but they are not zero.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>How can I see the fee before confirming a transaction?</summary>
+                <p>The bot shows you the estimated fee and final amount in the confirmation step before you approve any action. Review this carefully before confirming to avoid surprises on any transaction type.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Are there hidden fees in Crypto Bot?</summary>
+                <p>Crypto Bot aims for transparent pricing. All applicable fees are shown in the confirmation step. Users should review the full quoted cost before confirming any transaction.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Do P2P offer prices already include all costs?</summary>
+                <p>P2P offer prices are set by individual sellers and buyers and reflect their terms. Check the complete trade summary inside the bot before confirming a P2P deal to understand the full cost of the transaction.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Do market and limit orders have different fees?</summary>
+                <p>Some exchange platforms charge different rates for market orders and limit orders. Check the fee details shown in the bot confirmation for each order type you place, as the current structure may vary.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Should I always check the final quote before confirming?</summary>
+                <p>Yes. Always review the final quote, total payment amount, and visible fee details before confirming any action in Crypto Bot. This is especially important for P2P trades, exchange orders, and invoice-based payment flows.</p>
+            </details>
+        </article>
+
+        <article class="panel">
+            <h2>Get started</h2>
             <p>
-                Visit the blog for step-by-step guides about wallets, payments, TON transactions, Telegram bots, and
-                crypto trading workflows.
+                The best way to understand how fees work in practice is to open Crypto Bot and walk through the confirmation step for the feature you plan to use. The bot always shows you the cost before you commit. Visit the blog for more guides on managing your Telegram crypto workflow efficiently.
             </p>
 
             <div class="cta-buttons">
-                <a href="/blog" class="btn btn-primary">Read the Blog</a>
                 <a href="https://bit.ly/4jo0oou" class="btn btn-primary">Launch Crypto Bot</a>
+                <a href="/blog" class="btn btn-ghost">Read the Blog</a>
             </div>
         </article>
     </div>
@@ -281,7 +384,7 @@
 
 <footer>
     <div class="container footer-grid">
-        <p>© 2026 Crypto Bot Ltd.</p>
+        <p>&copy; 2026 Crypto Bot Ltd.</p>
         <div class="footer-links">
             <a href="/contact.html">Contact</a>
             <a href="/legal.html">Legal</a>
