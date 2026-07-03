@@ -24,7 +24,7 @@
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "Telegram Crypto Exchange \u2014 Crypto Bot",
+  "name": "Telegram Crypto Exchange — Crypto Bot",
   "url": "https://www.cryptobot.ltd/exchange",
   "description": "Trade crypto with market and limit orders directly in Telegram using Crypto Bot.",
   "inLanguage": "en"
@@ -38,18 +38,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What trading modes are available?",
+      "name": "What trading modes are available on the Telegram crypto exchange?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Crypto Bot exchange supports market orders for immediate execution and limit orders for price-based entry and exit."
+        "text": "Crypto Bot exchange supports market orders for immediate execution at the current price, and limit orders that allow you to set a specific target price and wait for the market to reach it."
       }
     },
     {
       "@type": "Question",
-      "name": "Who is Telegram exchange useful for?",
+      "name": "Do I need to leave Telegram to use the exchange?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "It is useful for users who want a fast Telegram-native trading workflow without switching between multiple platforms."
+        "text": "No. The entire exchange flow operates inside Telegram through Crypto Bot. You can place orders, monitor status, and manage your positions without opening any other app or website."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between a market order and a limit order?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A market order executes immediately at the best available current price. A limit order lets you specify the exact price at which you want to buy or sell, and waits until that price is reached before executing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who is Telegram exchange trading useful for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is useful for users who want a fast Telegram-native trading workflow, from beginners placing their first exchange order to active traders who want a connected workflow alongside wallet and P2P features."
       }
     },
     {
@@ -57,71 +73,30 @@
       "name": "How does exchange connect with wallet and P2P?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Users can move between wallet storage, exchange trading, and P2P deals depending on their strategy and preferred execution method."
+        "text": "Your Crypto Bot wallet balance is used for exchange orders. Funds from P2P trades land in your wallet and can be moved directly into exchange positions. All three features share the same balance pool inside Telegram."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What assets can I trade on the Telegram exchange?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Available trading pairs depend on the current exchange listings inside the bot. Open Crypto Bot in Telegram to see the live list of supported assets and pairs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are there fees for exchange orders?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Exchange orders may be subject to trading fees. See the Fees page for a general overview, and always review the final quote inside the bot before confirming any trade."
       }
     }
   ]
 }
 </script>
 
-    <style>
-        .content-page {
-            padding: 56px 0 80px;
-        }
-
-        .page-wrap {
-            width: min(980px, 92%);
-            margin: 0 auto;
-        }
-
-        .panel {
-            border: 1px solid rgba(145, 168, 222, 0.2);
-            background: rgba(22, 32, 57, 0.72);
-            border-radius: 18px;
-            padding: 28px;
-            box-shadow: 0 18px 45px rgba(0, 8, 30, 0.45);
-        }
-
-        .panel + .panel {
-            margin-top: 20px;
-        }
-
-        .panel h2 {
-            margin-bottom: 12px;
-        }
-
-        .panel p,
-        .panel li {
-            color: #dbe7fb;
-            line-height: 1.75;
-        }
-
-        .panel ul {
-            margin: 0 0 16px 20px;
-        }
-
-        .breadcrumbs {
-            color: #9fb2d8;
-            margin-bottom: 14px;
-        }
-
-        .breadcrumbs a {
-            color: #9fb2d8;
-            text-decoration: none;
-        }
-
-        .breadcrumbs a:hover {
-            text-decoration: underline;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 12px;
-            margin-top: 16px;
-            flex-wrap: wrap;
-        }
-    </style>
-<script type="application/ld+json">
+    <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -141,6 +116,33 @@
   ]
 }
 </script>
+
+    <style>
+        .content-page { padding: 56px 0 80px; }
+        .page-wrap { width: min(980px, 92%); margin: 0 auto; }
+        .panel { border: 1px solid rgba(145, 168, 222, 0.2); background: rgba(22, 32, 57, 0.72); border-radius: 18px; padding: 28px; box-shadow: 0 18px 45px rgba(0, 8, 30, 0.45); }
+        .panel + .panel { margin-top: 20px; }
+        .panel h2 { margin-bottom: 12px; }
+        .panel p, .panel li { color: #dbe7fb; line-height: 1.75; }
+        .panel ul, .panel ol { margin: 0 0 16px 20px; }
+        .breadcrumbs { color: #9fb2d8; margin-bottom: 14px; }
+        .breadcrumbs a { color: #9fb2d8; text-decoration: none; }
+        .breadcrumbs a:hover { text-decoration: underline; }
+        .cta-buttons { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+        .faq-item { border-bottom: 1px solid rgba(145,168,222,0.15); padding: 14px 0; }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-item summary { font-weight: 600; cursor: pointer; color: #eaf4ff; list-style: none; padding-right: 20px; position: relative; }
+        .faq-item summary::after { content: "+"; position: absolute; right: 0; top: 0; color: #9fb2d8; }
+        .faq-item[open] summary::after { content: "2"; }
+        .faq-item p { margin-top: 10px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 16px; }
+        .feature-card { background: rgba(145,168,222,0.07); border: 1px solid rgba(145,168,222,0.15); border-radius: 12px; padding: 18px; }
+        .feature-card h3 { margin: 0 0 8px; font-size: 1rem; color: #eaf4ff; }
+        .feature-card p { margin: 0; font-size: 0.92rem; }
+        .compare-table { width: 100%; border-collapse: collapse; margin-top: 14px; }
+        .compare-table th, .compare-table td { border-bottom: 1px solid rgba(145,168,222,0.15); padding: 12px 10px; text-align: left; color: #dbe7fb; line-height: 1.6; }
+        .compare-table th { color: #eaf4ff; font-weight: 700; }
+    </style>
 </head>
 <body>
 <header class="site-header">
@@ -149,7 +151,7 @@
             <img src="https://www.cryptobot.ltd/cryptobot.jpg" alt="Crypto Bot Logo">
             <span>Crypto Bot</span>
         </a>
-                <div class="nav-dots-wrap">
+        <div class="nav-dots-wrap">
             <button class="nav-dots-btn" id="navDotsBtn" aria-label="Menu" aria-expanded="false">&#8943;</button>
             <nav class="nav-dropdown" id="navDropdown" aria-label="Main">
                 <a href="/#features" onclick="closeNav()">Features</a>
@@ -171,15 +173,109 @@
         </div>
 
         <article class="panel">
-            <h2>Trading modes</h2>
+            <p>
+                The Crypto Bot exchange gives you a complete <strong>telegram crypto exchange</strong> experience inside your existing Telegram account. Place market orders for immediate execution or set limit orders to buy and sell at your preferred price — all without opening a separate trading platform, switching apps, or managing additional logins. Everything runs through the bot you already use for wallet management and P2P trading.
+            </p>
+        </article>
+
+        <article class="panel">
+            <h2>What exchange trading inside Telegram means</h2>
+            <p>
+                A Telegram-native exchange flow is different from logging into a web-based trading platform. Instead of navigating dashboards, chart panels, and order forms across a separate website or app, you interact with the exchange through the Crypto Bot interface inside Telegram. This simplifies the process without sacrificing core trading functionality.
+            </p>
+            <p>
+                Market orders and limit orders are the two fundamental building blocks of crypto exchange trading. Market orders execute immediately at the best available current price, so you know your trade will go through right away. Limit orders let you name your price — the order sits open until the market reaches your target, then executes automatically. Together, these two order types give you meaningful control over when and how you enter or exit a position.
+            </p>
+            <p>
+                For users who are new to trading, the Telegram exchange flow removes a lot of the intimidation factor. You are already inside a familiar chat interface, and the steps are guided. For more experienced traders, the connected workflow — wallet, exchange, and P2P all in one bot — reduces the friction of moving between tools throughout a trading session.
+            </p>
+        </article>
+
+        <article class="panel">
+            <h2>How to place an exchange order — step by step</h2>
+            <p>
+                Whether you are placing your first ever order or switching between market and limit mode, the process inside Crypto Bot is designed to be clear at every step.
+            </p>
+            <ol>
+                <li><strong>Open the Exchange section</strong> — Inside Crypto Bot, navigate to the Exchange menu. You will see available trading pairs and current price information.</li>
+                <li><strong>Choose your trading pair</strong> — Select the assets you want to trade. For example, if you hold TON and want to swap to USDT, select the TON/USDT pair.</li>
+                <li><strong>Select order type</strong> — Choose Market Order for immediate execution, or Limit Order to specify your target price.</li>
+                <li><strong>Set the amount</strong> — Enter the amount you want to buy or sell. The bot will show you the expected output and any applicable fees before you confirm.</li>
+                <li><strong>For limit orders, set your price</strong> — Enter the price at which you want the order to execute. The order will remain open until the market reaches that level.</li>
+                <li><strong>Confirm the order</strong> — Review all details and confirm. Market orders execute immediately. Limit orders are placed and will notify you when they execute.</li>
+                <li><strong>Track your position</strong> — Open orders and recent trade history are accessible from the bot. You can cancel open limit orders if your strategy changes.</li>
+            </ol>
+        </article>
+
+        <article class="panel">
+            <h2>Trading modes explained</h2>
             <p>
                 Crypto Bot exchange allows users to trade crypto directly inside Telegram without switching between multiple apps or interfaces.
                 This makes it easier to manage trades, monitor prices, and execute strategies inside one connected workflow.
             </p>
-            <ul>
-                <li><strong>Market order:</strong> immediate execution based on current price conditions</li>
-                <li><strong>Limit order:</strong> set your preferred entry or exit price and wait for execution</li>
-            </ul>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Market Order</h3>
+                    <p>Executes immediately at the best available current price. Use when speed matters more than hitting an exact entry point. Ideal for fast-moving situations or straightforward swaps.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Limit Order</h3>
+                    <p>Executes only when the market reaches your specified price. Use when you have a target entry or exit level and are prepared to wait for it. Gives you more price control.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Order tracking</h3>
+                    <p>Monitor open limit orders from inside the bot. Cancel or adjust them if market conditions change before execution.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Trade history</h3>
+                    <p>Review completed trades and their execution details through the bot. Useful for tracking your activity and understanding your trading patterns.</p>
+                </div>
+            </div>
+        </article>
+
+        <article class="panel">
+            <h2>When to use market orders vs. limit orders</h2>
+            <p>
+                Choosing between market and limit orders depends on your priorities in a given situation. Neither is universally better — they serve different needs.
+            </p>
+            <div style="overflow-x:auto;">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>Situation</th>
+                            <th>Recommended order type</th>
+                            <th>Reason</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>You need to trade now, price is secondary</td>
+                            <td>Market order</td>
+                            <td>Guaranteed execution at current best price</td>
+                        </tr>
+                        <tr>
+                            <td>You want a specific buy or sell price</td>
+                            <td>Limit order</td>
+                            <td>Only executes when your target is reached</td>
+                        </tr>
+                        <tr>
+                            <td>Market is moving fast</td>
+                            <td>Market order</td>
+                            <td>Avoids the risk of a limit order sitting unfilled</td>
+                        </tr>
+                        <tr>
+                            <td>You are not in a hurry and want a better price</td>
+                            <td>Limit order</td>
+                            <td>Patience can mean better execution price</td>
+                        </tr>
+                        <tr>
+                            <td>Simple crypto-to-crypto swap</td>
+                            <td>Market order</td>
+                            <td>Quick and straightforward for routine swaps</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </article>
 
         <article class="panel">
@@ -188,49 +284,91 @@
                 A Telegram-native exchange flow is useful for users who want speed, convenience, and fewer steps between wallet management and trade execution.
                 Instead of moving across separate services, you can keep the full process close to your existing Telegram workflow.
             </p>
+            <ul>
+                <li><strong>No app switching:</strong> Your wallet, P2P market, and exchange are all in one Telegram bot. You manage everything in one place.</li>
+                <li><strong>Immediate balance access:</strong> Funds in your Crypto Bot wallet are ready to trade. No separate deposit flow to a third-party exchange.</li>
+                <li><strong>Familiar interface:</strong> If you already use Crypto Bot for wallet or P2P, adding exchange trading to your routine has a very low learning curve.</li>
+                <li><strong>Order notifications:</strong> Limit orders notify you when they execute, directly inside Telegram — the same place you are already active.</li>
+                <li><strong>Clear confirmation steps:</strong> The bot shows you estimated output and fees before you confirm, so there are no surprises after the trade.</li>
+            </ul>
         </article>
 
         <article class="panel">
-            <h2>When to use market vs limit orders</h2>
-            <p>
-                Market orders are useful when execution speed matters more than precise entry price.
-                Limit orders are better when you want more control over price and are willing to wait for the market to reach your target.
-            </p>
+            <h2>Who this exchange flow is for</h2>
+            <ul>
+                <li><strong>Users who want to trade inside Telegram</strong> without maintaining accounts on separate exchange platforms</li>
+                <li><strong>Beginners</strong> looking for a simpler trading interface that removes dashboard complexity</li>
+                <li><strong>Active traders</strong> combining wallet, exchange, and P2P flows into a single Telegram-based routine</li>
+                <li><strong>Users who want quick crypto swaps</strong> between assets without leaving their existing Telegram environment</li>
+                <li><strong>P2P buyers</strong> who acquire crypto with fiat via P2P and then want to swap it into other assets through the exchange</li>
+            </ul>
         </article>
 
         <article class="panel">
             <h2>How exchange fits with wallet and P2P</h2>
             <p>
                 Exchange trading works best as part of a broader Telegram crypto system.
-                You can store assets in your wallet, use exchange tools for active trading, and switch to P2P when local payment methods or direct user-to-user deals make more sense.
+                You can store assets in your wallet, use exchange tools for active trading, and switch to P2P when local payment methods or direct user-to-user deals make more sense. The three features share the same wallet balance, so moving between them is seamless.
+            </p>
+            <p>
+                A common workflow might look like this: buy TON via P2P using a local bank transfer, swap part of it to USDT via the exchange using a limit order, then hold both in your wallet until your next move. All of that happens inside Telegram without a single external platform.
             </p>
 
             <div class="cta-buttons">
                 <a href="/wallet.html" class="btn btn-ghost">Open Wallet Page</a>
                 <a href="/p2p.html" class="btn btn-ghost">Explore P2P</a>
-                <a href="https://bit.ly/4cP84h2" class="btn btn-primary">Open Exchange</a>
+                <a href="https://bit.ly/4jo0oou" class="btn btn-primary">Open Exchange</a>
             </div>
         </article>
 
         <article class="panel">
-            <h2>Who this exchange flow is for</h2>
-            <ul>
-                <li>Users who want to trade inside Telegram</li>
-                <li>Beginners looking for a simpler trading interface</li>
-                <li>Active traders combining wallet, exchange, and P2P flows</li>
-                <li>Users who want quick execution without leaving their Telegram environment</li>
-            </ul>
+            <h2>Frequently Asked Questions</h2>
+
+            <details class="faq-item">
+                <summary>What trading modes are available on the Telegram crypto exchange?</summary>
+                <p>Crypto Bot exchange supports market orders for immediate execution at the current price, and limit orders that let you set a specific target price. The order executes automatically when the market reaches your level.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Do I need to leave Telegram to use the exchange?</summary>
+                <p>No. The entire exchange flow operates inside Telegram through Crypto Bot. You can place orders, track open positions, and view trade history without opening any other app or website.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>What is the difference between a market order and a limit order?</summary>
+                <p>A market order executes immediately at the best available current price. A limit order lets you specify the exact price at which you want to buy or sell, and waits until that price is reached before executing.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>What assets can I trade on the Telegram exchange?</summary>
+                <p>Available trading pairs depend on the current exchange listings inside the bot. Open Crypto Bot in Telegram to see the live list of supported assets and pairs.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>How does my wallet balance connect to exchange orders?</summary>
+                <p>Your Crypto Bot wallet balance is directly used for exchange orders. There is no separate deposit step — the funds are already in the same system. Completed trades update your wallet balance automatically.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Can I cancel a limit order after placing it?</summary>
+                <p>Yes. Open limit orders can be cancelled from within the bot before they execute. If your strategy changes or the market moves in an unexpected direction, you can cancel and place a new order.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Are there fees for exchange orders?</summary>
+                <p>Exchange orders may be subject to trading fees. See the <a href="/fees.html">Fees page</a> for a general overview, and always review the final quote inside the bot before confirming any trade.</p>
+            </details>
         </article>
 
         <article class="panel">
-            <h2>Learn more</h2>
+            <h2>Get started with the Telegram crypto exchange</h2>
             <p>
-                Read more guides and practical articles about Telegram crypto trading, TON, payments, and wallet workflows on the blog.
+                The fastest way to start is to open Crypto Bot in Telegram and navigate to the Exchange section. You can review available pairs and current prices without committing to a trade. When you are ready, choose your order type, set your amount, and confirm. The entire process is designed to be approachable for users at any experience level, while still giving active traders the order types they need for a real <strong>telegram crypto exchange</strong> workflow.
             </p>
             <div class="cta-buttons">
-                <a href="/blog" class="btn btn-primary">Read the Blog</a>
+                <a href="https://bit.ly/4jo0oou" class="btn btn-primary">Open Exchange in Telegram</a>
+                <a href="/blog" class="btn btn-ghost">Read the Blog</a>
                 <a href="/fees.html" class="btn btn-ghost">View Fees</a>
-                <a href="/security.html" class="btn btn-ghost">Read Security</a>
             </div>
         </article>
     </div>
@@ -238,7 +376,7 @@
 
 <footer>
     <div class="container footer-grid">
-        <p>© 2026 Crypto Bot Ltd.</p>
+        <p>&copy; 2026 Crypto Bot Ltd.</p>
         <div class="footer-links">
             <a href="/wallet.html">Wallet</a>
             <a href="/security.html">Security</a>
