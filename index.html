@@ -8,9 +8,9 @@
     <meta name="theme-color" content="#0a0f1f">
     <link rel="icon" href="https://www.cryptobot.ltd/favicon.ico" type="image/x-icon">
 
-    <meta name="description" content="Crypto Bot is the fastest way to buy, sell, store, and transfer crypto directly in Telegram. Trade TON, BTC, ETH and more with P2P market, exchange, and built-in crypto payments — no app switching needed.">
+    <meta name="description" content="Crypto Bot is the fastest way to buy, sell, store, and transfer crypto in Telegram. Trade TON, BTC, ETH with P2P, exchange, and built-in payments.">
     <meta property="og:title" content="Crypto Bot — Fast Crypto Trading in Telegram">
-    <meta property="og:description" content="One clean app flow for wallet, P2P, exchange, checks, and payments — all inside Telegram.">
+    <meta property="og:description" content="Crypto Bot is the fastest way to buy, sell, store, and transfer crypto in Telegram. Trade TON, BTC, ETH with P2P, exchange, and built-in payments.">
     <meta property="og:image" content="https://www.cryptobot.ltd/Crypto_Bot.png">
     <meta property="og:url" content="https://www.cryptobot.ltd/">
     <meta property="og:type" content="website">
@@ -18,7 +18,7 @@
     <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Crypto Bot — Fast Crypto Trading in Telegram">
-    <meta name="twitter:description" content="Buy, sell, pay, and manage crypto in one Telegram-native experience.">
+    <meta name="twitter:description" content="Crypto Bot is the fastest way to buy, sell, store, and transfer crypto in Telegram. Trade TON, BTC, ETH with P2P, exchange, and built-in payments.">
     <meta name="twitter:image" content="https://www.cryptobot.ltd/Crypto_Bot.png">
 
     <script type="application/ld+json">
@@ -197,7 +197,10 @@
 <body>
 <canvas id="bgCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;"></canvas>
 <script>
-(function(){
+window.addEventListener('load', function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.innerWidth < 768) return;
+  (function(){
   var c = document.getElementById('bgCanvas');
   var ctx = c.getContext('2d');
   var W, H, candles = [], COLS = 28, scroll = 0;
@@ -291,6 +294,7 @@
   initCandles();
   draw();
 })();
+});
 </script>
 <header class="site-header">
     <div class="container header-content">
@@ -327,7 +331,7 @@
 <main>
 <section class="hero" id="top">
     <div class="container hero-inner">
-        <img src="https://www.cryptobot.ltd/cryptobot.jpg" alt="Crypto Bot" class="hero-logo">
+        <img src="https://www.cryptobot.ltd/cryptobot.jpg" alt="Crypto Bot" class="hero-logo" loading="lazy">
         <p class="eyebrow">Telegram-native crypto platform</p>
         <h1>Trade, pay, and manage crypto at <span>light speed</span>.</h1>
         <p class="hero-copy">Crypto Bot combines wallet, P2P market, exchange, checks, and payments into one seamless Telegram experience.</p>
